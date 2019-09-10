@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1567874396 source:/home/dan_santos/Documentos/Repositorios/BankApp/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1541945356 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/TDA-Map/Map.c
+	"Map.h"
+	<math.h>
+	<string.h>
+	<stdlib.h>
+	<stdint.h>
+	<assert.h>
+
+1538509128 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/TDA-Map/Map.h
+
