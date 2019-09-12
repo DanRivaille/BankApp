@@ -31,6 +31,18 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Libraries/AdminOptions/adminOptions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Libraries/AdminOptions/adminOptions.h" />
+		<Unit filename="Libraries/ClientOptions/clientOptions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Libraries/ClientOptions/clientOptions.h" />
+		<Unit filename="Libraries/FileFunctions/fileFunctions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Libraries/FileFunctions/fileFunctions.h" />
 		<Unit filename="Libraries/TDA-List/List.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -39,6 +51,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Libraries/TDA-Map/Map.h" />
+		<Unit filename="Libraries/typesData.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

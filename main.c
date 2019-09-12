@@ -8,6 +8,7 @@
 
 #include "Libraries/TDA-List/List.h"
 #include "Libraries/TDA-Map/Map.h"
+#include "Libraries/typesData.h"
 
 int main()
 {
