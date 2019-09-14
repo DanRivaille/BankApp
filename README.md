@@ -1,2 +1,2 @@
 # BankApp
-Aplicacion de consola que simula una apliacion bancaria
+Aplicacion de consola que simula una aplicacion bancaria

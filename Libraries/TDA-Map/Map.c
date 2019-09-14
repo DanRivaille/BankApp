@@ -25,6 +25,7 @@
 #include "Map.h"
 #include <math.h>
 #include <string.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <assert.h>
@@ -250,4 +251,23 @@ void removeAllMap(Map * map) {
     memset(map->buckets, 0, primes[0] * sizeof(Pair *)); // se inicializa en null.
 
 
+}
+
+long long stringHash(const void * key) {
+    long long hash = 5381;
+
+    const char * ptr;
+
+    for (ptr = key; *ptr != '\0'; ptr++) {
+        hash = ((hash << 5) + hash) + tolower(*ptr); /* hash * 33 + c */
+    }
+
+    return hash;
+}
+
+int stringEqual(const void * key1, const void * key2) {
+    const char * A = key1;
+    const char * B = key2;
+
+    return strcmp(A, B) == 0;
 }
