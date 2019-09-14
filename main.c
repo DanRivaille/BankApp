@@ -16,5 +16,7 @@ int main()
 {
     //Map *profiles_admi = loadProfiles("admins.txt");
 
+    //saveProfiles(profiles_admi, "admins.txt");
+
     return 0;
 }

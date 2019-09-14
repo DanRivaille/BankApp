@@ -36,6 +36,26 @@ Map *loadProfiles(char file_name[])
     return profiles;
 }
 
+void saveProfiles(Map *profiles, char file_name[])
+{
+    char file_path[MAX_PATH + 1] = "Data//Profiles//";
+    strcat(file_path, file_name);
+
+    FILE *profiles_file = fopen(file_path, "w");
+    validFileOpening(profiles_file);
+
+    typeProfile *current_profile;
+    current_profile = (typeProfile *) firstMap(profiles);
+
+    while(current_profile != NULL)
+    {
+        fprintf(profiles_file, "%s;%s\n", current_profile->rut, current_profile->pass);
+
+        current_profile = (typeProfile *) nextMap(profiles);
+    }
+    fclose(profiles_file);
+}
+
 void validFileOpening(FILE *file)
 {
     if(file == NULL)
