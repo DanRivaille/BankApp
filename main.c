@@ -11,10 +11,13 @@
 #include "Libraries/typesData.h"
 #include "Libraries/fileFunctions.h"
 #include "Libraries/adminOptions.h"
+#include "Libraries/login.h"
 
 int main()
 {
-    //Map *profiles_admi = loadProfiles("admins.txt");
+    Map *profiles_admi = loadProfiles("admins.txt");
+
+    adminLogin(profiles_admi);
 
     //saveProfiles(profiles_admi, "admins.txt");
 
