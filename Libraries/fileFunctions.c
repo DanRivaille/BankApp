@@ -1,8 +1,6 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 
 #include "typesData.h"
 #include "TDA-List/List.h"

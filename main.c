@@ -15,11 +15,14 @@
 
 int main()
 {
-    Map *profiles_admi = loadProfiles("admins.txt");
+    //Map *profiles_admins = loadProfiles("admins.txt");
+    Map *profiles_clients = loadProfiles("clients.txt");
 
-    adminLogin(profiles_admi);
+    //adminLogin(profiles_admins);
 
-    //saveProfiles(profiles_admi, "admins.txt");
+    addClient(profiles_clients);
+
+    saveProfiles(profiles_clients, "clients.txt");
 
     return 0;
 }
