@@ -13,7 +13,7 @@
 Map *loadProfiles(char file_name[]);
 
 /**
- * Funcion que guarda los perfiles cargados en el mapa "profiles", en el archivo de nombre "file_name".
+ * Procedimiento que guarda los perfiles cargados en el mapa "profiles", en el archivo de nombre "file_name".
  *
  * @param profiles: mapa de los perfiles cargados.
  * @param file_name: nombre del archivo en donde se guardara los perfiles.
@@ -30,7 +30,14 @@ void saveProfiles(Map *profiles, char file_name[]);
 typeClient *loadClientInfo(char rut[]);
 
 /**
-  * Funcion que valida si el archivo "file" fue abierto correctamente, en caso contrario, imprime una advertencia y aborta
+ * Procedimiento que guarda la informacion de "client", en su carpeta correspondiente.
+ *
+ * @param client: registro de typeClient, que contiene la informacion del cliente a ser guardada.
+ */
+void saveClientInfo(typeClient *client);
+
+/**
+  * Procedimiento que valida si el archivo "file" fue abierto correctamente, en caso contrario, imprime una advertencia y aborta
   * la ejecucion del programa
   *
   * @param file: puntero al archivo a analizar

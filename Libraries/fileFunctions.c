@@ -83,6 +83,31 @@ typeClient *loadClientInfo(char rut[])
     return client;
 }
 
+void saveClientInfo(typeClient *client)
+{
+    char file_path[MAX_PATH + 1] = "Data//Users//";
+    strcat(file_path, client->rut);
+    strcat(file_path, "//client-info.txt");
+
+    FILE *client_file = fopen(file_path, "w");
+    validFileOpening(client_file);
+
+    fprintf(client_file, "%s;%s;", client->rut, client->name);
+
+    if(client->rut_account != NULL)
+        fprintf(client_file, "true;");
+    else
+        fprintf(client_file, "false;");
+
+    if(client->saving_account != NULL)
+        fprintf(client_file, "true;");
+    else
+        fprintf(client_file, "false;");
+
+    fprintf(client_file, "%i\n", client->notices);
+    fclose(client_file);
+}
+
 void validFileOpening(FILE *file)
 {
     if(file == NULL)

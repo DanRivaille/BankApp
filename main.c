@@ -22,7 +22,13 @@ int main()
 
     //addClient(profiles_clients);
 
-    searchClientRut(profiles_clients);
+    typeClient *client;
+
+    client = searchClientRut(profiles_clients);
+
+    addNotice(client);
+
+    saveClientInfo(client);
 
     //saveProfiles(profiles_clients, "clients.txt");
 

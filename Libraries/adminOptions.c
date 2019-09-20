@@ -46,7 +46,7 @@ void removeClient(Map *profiles)
 
 }
 
-void searchClientRut(Map *clients_profiles)
+typeClient* searchClientRut(Map *clients_profiles)
 {
     char rut[MAX_CARACT + 1];
 
@@ -63,7 +63,28 @@ void searchClientRut(Map *clients_profiles)
     }
 
     typeClient *client = loadClientInfo(rut);
-    showClient(client);
+
+    return client;
+}
+
+void addNotice(typeClient *client)
+{
+    char client_path[MAX_PATH + 1] = "Data//Users//";
+    strcat(client_path, client->rut);
+    strcat(client_path, "//notices.txt");
+
+    FILE *notices_file = fopen(client_path, "a");
+    validFileOpening(notices_file);
+
+    char new_notice[MAX_NOTICES + 1];
+
+    printf("Ingrese el nuevo aviso:\n\n");
+    scanf("%[^\n]s", new_notice);
+
+    fprintf(notices_file, "%s\n", new_notice);
+    fclose(notices_file);
+
+    client->notices++;
 }
 
 void showClient(typeClient *client)
@@ -109,6 +130,8 @@ static typeClient *createClient(char new_rut[])
     printf("Ingrese el nombre del nuevo cliente: ");
     scanf("%[^\n]s", new_client->name);
 
+    new_client->notices = 1;
+
     return new_client;
 }
 
@@ -127,7 +150,7 @@ static void createClientFiles(typeClient *new_client)
     strcat(file_path, "client-info.txt");
 
     new_file = fopen(file_path, "w");                //se crea el archivo de la informacion del cliente
-    fprintf(new_file, "%s;%s;false;false;1\n", new_client->rut, new_client->name);
+    fprintf(new_file, "%s;%s;false;false;%i\n", new_client->rut, new_client->name, new_client->notices);
     fclose(new_file);
 
     strcpy(file_path, client_path);

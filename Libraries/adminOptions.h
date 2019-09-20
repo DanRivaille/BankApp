@@ -22,12 +22,21 @@ void addClient(Map *profiles);
 void removeClient(Map *profiles);
 
 /**
- * Procedimiento que lee un rut, y lo busca en el mapa de clientes, si no lo encuentra imprime una advertencia y lo vuelve a
- * leer, si lo encuentra muestra la infomacion del cliente asociado al rut ingresado.
+ * Funcion que lee un rut, y lo busca en el mapa de clientes, si no lo encuentra imprime una advertencia y lo vuelve a
+ * leer, si lo encuentra lo retorna.
  *
  * @param clients_profiles: mapa que contiene los perfiles de los clientes guardados en el sistema,
+ * @return puntero al registro correspondiente al cliente buscado.
  */
-void searchClientRut(Map *clients_profiles);
+typeClient *searchClientRut(Map *clients_profiles);
+
+/**
+ * Procedimiento que lee un nuevo aviso, y lo guarda en el archivo "notices.txt" en la carpeta del cliente, ademas incrementa
+ * en contador de la cantidad de avisos en "client-info.txt".
+ *
+ * @param client: registro de typeClient, que contiene la informacion del cliente.
+ */
+void addNotice(typeClient *client);
 
 /**
  * Procedimiento que muestra la informacion basica de un cliente (nombre, rut, cuentas activas).
