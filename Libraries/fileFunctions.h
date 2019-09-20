@@ -21,6 +21,15 @@ Map *loadProfiles(char file_name[]);
 void saveProfiles(Map *profiles, char file_name[]);
 
 /**
+ * Funcion que carga la informacion del cliente, para ello entra a la carpeta del cliente usando su rut, y carga la informacion
+ * del archivo "client-info.txt".
+ *
+ * @param rut: rut del cliente, se usa para entrar a la carpeta del cliente.
+ * @return puntero a typeClient, con la informacion recien cargada.
+ */
+typeClient *loadClientInfo(char rut[]);
+
+/**
   * Funcion que valida si el archivo "file" fue abierto correctamente, en caso contrario, imprime una advertencia y aborta
   * la ejecucion del programa
   *

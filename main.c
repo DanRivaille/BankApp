@@ -20,9 +20,11 @@ int main()
 
     //adminLogin(profiles_admins);
 
-    addClient(profiles_clients);
+    //addClient(profiles_clients);
 
-    saveProfiles(profiles_clients, "clients.txt");
+    searchClientRut(profiles_clients);
+
+    //saveProfiles(profiles_clients, "clients.txt");
 
     return 0;
 }

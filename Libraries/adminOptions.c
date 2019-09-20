@@ -41,6 +41,44 @@ void addClient(Map *profiles)
     createClientFiles(new_client);
 }
 
+void removeClient(Map *profiles)
+{
+
+}
+
+void searchClientRut(Map *clients_profiles)
+{
+    char rut[MAX_CARACT + 1];
+
+    printf("Ingrese un rut: ");
+    scanf("%s", rut);
+    getchar();
+
+    while(searchMap(clients_profiles, rut) == NULL)
+    {
+        printf("No se encontro un perfil que coincida con el rut ingresado\n");
+        printf("Intente nuevamente: ");
+        scanf("%s", rut);
+        getchar();
+    }
+
+    typeClient *client = loadClientInfo(rut);
+    showClient(client);
+}
+
+void showClient(typeClient *client)
+{
+    printf("Nombre: %s\n", client->name);
+    printf("Rut:    %s\n", client->rut);
+    printf("Cuentas activas:\n");
+
+    if(client->rut_account != NULL)
+        printf("Cuenta Rut\n");
+
+    if(client->saving_account != NULL)
+        printf("Cuenta Ahorro\n");
+}
+
 static typeProfile *createProfile(char new_rut[])
 {
     typeProfile *new_profile = (typeProfile *) calloc(1, sizeof(typeProfile));

@@ -54,6 +54,35 @@ void saveProfiles(Map *profiles, char file_name[])
     fclose(profiles_file);
 }
 
+typeClient *loadClientInfo(char rut[])
+{
+    char client_path[MAX_PATH + 1] = "Data//Users//";
+    strcat(client_path, rut);
+    strcat(client_path, "//client-info.txt");
+
+    FILE *client_file = fopen(client_path, "r");
+    validFileOpening(client_file);
+
+    typeClient *client;
+    client = (typeClient *) calloc(1, sizeof(typeClient));
+
+    char line[MAX_NOTICES + 1];
+    fscanf(client_file, "%[^\n]s", line);
+
+    strcpy(client->rut, strtok(line, ";"));
+    strcpy(client->name, strtok(NULL, ";"));
+
+    if(strcmp(strtok(NULL, ";"), "true") == 0)
+        client->rut_account = (typeAccount *) calloc(1, sizeof(typeAccount));
+
+    if(strcmp(strtok(NULL, ";"), "true") == 0)
+        client->saving_account = (typeAccount *) calloc(1, sizeof(typeAccount));
+
+    client->notices = atoi(strtok(NULL, "\n"));
+
+    return client;
+}
+
 void validFileOpening(FILE *file)
 {
     if(file == NULL)
