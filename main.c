@@ -11,21 +11,23 @@
 #include "Libraries/typesData.h"
 #include "Libraries/fileFunctions.h"
 #include "Libraries/adminOptions.h"
+#include "Libraries/clientOptions.h"
 #include "Libraries/login.h"
 
 int main()
 {
     Map *acc_numbers = loadAccNumbers();
 
-    typeAddressee *adrese = firstMap(acc_numbers);
+    Map *profiles = loadProfiles("clients.txt");
 
-    while(adrese != NULL)
-    {
-        printf("-%s %s %s ", adrese->rut, adrese->name, adrese->account_number);
-        printf("%i-\n", adrese->account_type);
+    typeProfile *profile = login(profiles);
+    typeClient *client = loadClientInfo(profile->rut);
 
-        adrese = nextMap(acc_numbers);
-    }
+    createAccount(acc_numbers, client, RUT_ACC);
+
+    saveClientInfo(client);
+    saveProfiles(profiles, "clients.txt");
+    saveAccNumbers(acc_numbers);
 
     return 0;
 }

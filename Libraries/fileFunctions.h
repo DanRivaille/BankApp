@@ -44,6 +44,13 @@ void saveClientInfo(typeClient *client);
 Map *loadAccNumbers(void);
 
 /**
+ * Funcion que guarda los numeros de cuenta validos guardados del sistema.
+ *
+ * @param puntero al mapa con los numeros de cuenta cargados.
+ */
+void saveAccNumbers(Map *acc_numbers);
+
+/**
   * Procedimiento que valida si el archivo "file" fue abierto correctamente, en caso contrario, imprime una advertencia y aborta
   * la ejecucion del programa
   *

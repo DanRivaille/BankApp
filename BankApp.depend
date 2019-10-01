@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1569967930 source:/home/dan_santos/Documentos/Repositorios/BankApp/main.c
+1569970814 source:/home/dan_santos/Documentos/Repositorios/BankApp/main.c
 	"stdio.h"
 	"Libraries/TDA-List/List.h"
 	"Libraries/TDA-Map/Map.h"
 	"Libraries/typesData.h"
 	"Libraries/fileFunctions.h"
 	"Libraries/adminOptions.h"
+	"Libraries/clientOptions.h"
 	"Libraries/login.h"
 
 1568472340 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/TDA-Map/Map.c
@@ -48,9 +49,20 @@
 	"fileFunctions.h"
 	"adminOptions.h"
 
-1568151467 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/clientOptions.c
+1569971147 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/clientOptions.c
+	<stdio.h>
+	<time.h>
+	<stdlib.h>
+	<string.h>
+	<sys/stat.h>
+	<sys/types.h>
+	"TDA-List/List.h"
+	"TDA-Map/Map.h"
+	"typesData.h"
+	"fileFunctions.h"
+	"clientOptions.h"
 
-1569967627 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.c
+1569970115 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.c
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
@@ -59,17 +71,19 @@
 	"TDA-Map/Map.h"
 	"fileFunctions.h"
 
-1569967003 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.h
+1569969760 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.h
 
 1568939112 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/adminOptions.h
 
 1569966593 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/login.h
 
-1569966605 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/login.c
+1569969781 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/login.c
 	<stdio.h>
 	<string.h>
 	"TDA-Map/Map.h"
 	"typesData.h"
 	"fileFunctions.h"
 	"login.h"
+
+1569969434 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/clientOptions.h
 

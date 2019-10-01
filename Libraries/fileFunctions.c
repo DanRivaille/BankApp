@@ -7,7 +7,7 @@
 #include "TDA-Map/Map.h"
 #include "fileFunctions.h"
 
-/** Prototipos */
+/** Prototipos de funciones estaticas */
 static typeAddressee *createAddresse(char line[]);
 
 Map *loadProfiles(char file_name[])
@@ -133,6 +133,28 @@ Map *loadAccNumbers(void)
     }
 
     return acc_numbers;
+}
+
+void saveAccNumbers(Map *acc_numbers)
+{
+    char file_path[MAX_PATH + 1] = "Data//Users//acc-numbs.txt";
+
+    FILE *acc_file = fopen(file_path, "w");
+    validFileOpening(acc_file);
+
+    typeAddressee *addressee = (typeAddressee *) firstMap(acc_numbers);
+
+    while(addressee != NULL)
+    {
+        fprintf(acc_file, "%s;%s;%s;", addressee->rut, addressee->name, addressee->account_number);
+
+        if(addressee->account_type == RUT_ACC)
+            fprintf(acc_file, "rut-acc;false\n");
+        else
+            fprintf(acc_file, "saving-acc;false\n");
+
+        addressee = (typeAddressee *) nextMap(acc_numbers);
+    }
 }
 
 static typeAddressee *createAddresse(char line[])

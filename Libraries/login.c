@@ -44,4 +44,6 @@ typeProfile *login(Map *profiles)
             success_login = true;
         }
     }
+
+    return profile;
 }
