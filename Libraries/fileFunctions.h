@@ -37,6 +37,13 @@ typeClient *loadClientInfo(char rut[]);
 void saveClientInfo(typeClient *client);
 
 /**
+ * Funcion que carga los numeros de cuenta validos guardados del sistema.
+ *
+ * @return puntero al mapa creado con los numeros de cuenta cargados.
+ */
+Map *loadAccNumbers(void);
+
+/**
   * Procedimiento que valida si el archivo "file" fue abierto correctamente, en caso contrario, imprime una advertencia y aborta
   * la ejecucion del programa
   *

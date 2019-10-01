@@ -10,6 +10,9 @@
 #define MAX_NAME 30
 #define MAX_NOTICES 150
 
+#define RUT_ACC 1
+#define SAVING_ACC 2
+
 struct typeProfile{                 //guardara los perfiles tanto de los admins, como de los clientes
     char rut[MAX_CARACT + 1];           //rut unico del usuario
     char pass[MAX_CARACT + 1];          //contraseña asociada al rut

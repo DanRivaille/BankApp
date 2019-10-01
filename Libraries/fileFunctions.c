@@ -7,6 +7,9 @@
 #include "TDA-Map/Map.h"
 #include "fileFunctions.h"
 
+/** Prototipos */
+static typeAddressee *createAddresse(char line[]);
+
 Map *loadProfiles(char file_name[])
 {
     char file_path[MAX_PATH + 1] = "Data//Profiles//";          //ruta del archivo a abrir
@@ -106,6 +109,52 @@ void saveClientInfo(typeClient *client)
 
     fprintf(client_file, "%i\n", client->notices);
     fclose(client_file);
+}
+
+Map *loadAccNumbers(void)
+{
+    Map *acc_numbers = createMap(stringHash, stringEqual);
+
+    char file_path[MAX_PATH + 1] = "Data//Users//acc-numbs.txt";
+
+    FILE *acc_file = fopen(file_path, "r");
+    validFileOpening(acc_file);
+
+    char line[MAX_NOTICES + 1];
+
+    while(fscanf(acc_file, "%[^\n]s", line) != EOF)
+    {
+        fgetc(acc_file);        //se saca el \n del buffer
+
+        typeAddressee *new_addressee;
+        new_addressee = createAddresse(line);
+
+        insertMap(acc_numbers, new_addressee->account_number, new_addressee);
+    }
+
+    return acc_numbers;
+}
+
+static typeAddressee *createAddresse(char line[])
+{
+    typeAddressee *new_addressee;
+    new_addressee = (typeAddressee *) calloc(1, sizeof(typeAddressee));
+
+    strcpy(new_addressee->rut, strtok(line, ";"));
+    strcpy(new_addressee->name, strtok(NULL, ";"));
+    strcpy(new_addressee->account_number, strtok(NULL, ";"));
+
+    if(strcmp(strtok(NULL, ";"), "rut-acc") == 0)
+        new_addressee->account_type = RUT_ACC;
+    else
+        new_addressee->account_type = SAVING_ACC;
+
+    if(strcmp(strtok(NULL, "\n"), "true") == 0)
+        new_addressee->favorite = true;
+    else
+        new_addressee->favorite = false;
+
+    return new_addressee;
 }
 
 void validFileOpening(FILE *file)

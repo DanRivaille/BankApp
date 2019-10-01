@@ -15,22 +15,17 @@
 
 int main()
 {
-    //Map *profiles_admins = loadProfiles("admins.txt");
-    Map *profiles_clients = loadProfiles("clients.txt");
+    Map *acc_numbers = loadAccNumbers();
 
-    //adminLogin(profiles_admins);
+    typeAddressee *adrese = firstMap(acc_numbers);
 
-    //addClient(profiles_clients);
+    while(adrese != NULL)
+    {
+        printf("-%s %s %s ", adrese->rut, adrese->name, adrese->account_number);
+        printf("%i-\n", adrese->account_type);
 
-    typeClient *client;
-
-    client = searchClientRut(profiles_clients);
-
-    addNotice(client);
-
-    saveClientInfo(client);
-
-    //saveProfiles(profiles_clients, "clients.txt");
+        adrese = nextMap(acc_numbers);
+    }
 
     return 0;
 }

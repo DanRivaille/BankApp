@@ -7,6 +7,6 @@
  *
  * @param profiles_admin: mapa que contiene los perfiles de admins guardados en el sistema.
  */
-void adminLogin(Map *profiles_admin);
+typeProfile *login(Map *profiles);
 
 #endif // LOGIN_H
