@@ -51,6 +51,26 @@ Map *loadAccNumbers(void);
 void saveAccNumbers(Map *acc_numbers);
 
 /**
+ * Procedimiento que carga la informacion de una cuenta del cliente, para ello ingresa a la carpeta del cliente, y
+ * dependiendo del tipo de cuenta a cargar (rut o de ahorro) ingresa a la carpeta de la cuenta correspondiente
+ * y carga la informacion de los archivo de dicha carpeta.
+ *
+ * @param client: puntero a typeClient que contiene la informacion del cliente.
+ * @param account_type: indica el tipo de cuenta a cargar.
+ */
+void loadAccount(typeClient *client, char account_type);
+
+/**
+ * Procedimiento que guarda la informacion de una cuenta del cliente, para ello ingresa a la carpeta del cliente, y
+ * dependiendo del tipo de cuenta a guardar (rut o de ahorro) ingresa a la carpeta de la cuenta correspondiente
+ * y guarda la informacion en los archivos correspondientes en dicha carpeta.
+ *
+ * @param client: puntero a typeClient que contiene la informacion del cliente.
+ * @param account_type: indica el tipo de cuenta a guardar.
+ */
+void saveAccount(typeClient *client, char account_type);
+
+/**
   * Procedimiento que valida si el archivo "file" fue abierto correctamente, en caso contrario, imprime una advertencia y aborta
   * la ejecucion del programa
   *

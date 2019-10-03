@@ -23,7 +23,16 @@ int main()
     typeProfile *profile = login(profiles);
     typeClient *client = loadClientInfo(profile->rut);
 
-    createAccount(acc_numbers, client, RUT_ACC);
+    loadAccount(client, RUT_ACC);
+    loadAccount(client, SAVING_ACC);
+
+    //createAccount(acc_numbers, client, SAVING_ACC);
+    //createAccount(acc_numbers, client, RUT_ACC);
+
+    showClient(client);
+
+    saveAccount(client, RUT_ACC);
+    saveAccount(client, SAVING_ACC);
 
     saveClientInfo(client);
     saveProfiles(profiles, "clients.txt");
