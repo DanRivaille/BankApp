@@ -39,6 +39,8 @@ void addClient(Map *profiles)
     new_client = createClient(new_rut);
 
     createClientFiles(new_client);
+
+    printf("Su password inicial es : %s\n", new_profile->pass);
 }
 
 void removeClient(Map *profiles)
