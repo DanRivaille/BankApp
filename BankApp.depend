@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1571847964 source:/home/dan_santos/Documentos/Repositorios/BankApp/main.c
-	"stdio.h"
+1572301741 source:/home/dan_santos/Documentos/Repositorios/BankApp/main.c
+	<stdio.h>
+	<stdlib.h>
 	"Libraries/TDA-List/List.h"
 	"Libraries/TDA-Map/Map.h"
 	"Libraries/typesData.h"
@@ -38,7 +39,7 @@
 	"TDA-Map/Map.h"
 	"TDA-List/List.h"
 
-1571847578 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/adminOptions.c
+1572303596 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/adminOptions.c
 	<stdlib.h>
 	<stdio.h>
 	<string.h>
@@ -62,7 +63,7 @@
 	"fileFunctions.h"
 	"clientOptions.h"
 
-1570142921 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.c
+1572303596 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.c
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
@@ -71,7 +72,7 @@
 	"TDA-Map/Map.h"
 	"fileFunctions.h"
 
-1570141850 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.h
+1572303541 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.h
 
 1568939112 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/adminOptions.h
 

@@ -9,6 +9,7 @@
 #include "fileFunctions.h"
 #include "adminOptions.h"
 
+/** Prototipos de funciones estaticas */
 static typeProfile *createProfile(char new_rut[]);
 static void createPass(typeProfile *profile);
 static typeClient *createClient(char new_rut[]);
@@ -41,6 +42,9 @@ void addClient(Map *profiles)
     createClientFiles(new_client);
 
     printf("Su password inicial es : %s\n", new_profile->pass);
+
+    _pause();                           //se intenta simular system("pause"); de windows
+    system("clear");
 }
 
 void removeClient(Map *profiles)
@@ -52,7 +56,7 @@ typeClient* searchClientRut(Map *clients_profiles)
 {
     char rut[MAX_CARACT + 1];
 
-    printf("Ingrese un rut: ");
+    printf("Ingrese el rut del cliente a buscar: ");
     scanf("%s", rut);
     getchar();
 
@@ -87,6 +91,7 @@ void addNotice(typeClient *client)
     fclose(notices_file);
 
     client->notices++;
+    system("clear");
 }
 
 void showClient(typeClient *client)

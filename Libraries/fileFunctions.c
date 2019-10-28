@@ -414,3 +414,11 @@ static void saveAccAddressees(typeAccount *account, char client_path[])
 
     fclose(addressees_file);
 }
+
+void _pause(void)
+{
+    printf("Pulse una tecla para continuar");
+    int ch;
+    while(((ch = fgetc(stdin)) != EOF) && (ch != '\n')){}
+    getchar();
+}
