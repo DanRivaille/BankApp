@@ -311,8 +311,8 @@ void optionsAddressees(Map *acc_numbers, typeAccount *account)
             case 1  : showAddressees(account);                       break;
             case 2  : showFavAddressees(account);                    break;
             case 3  : addAddressee(acc_numbers, account);            break;
-            case 4  : printf("eliminar destinatario\n");             break;
-            case 5  : return ;                               break;
+            case 4  : deleteAddressee(account);                      break;
+            case 5  : return ;                                       break;
             default : printf("Opcion ingresada no valida\n");
         }
         _pause();

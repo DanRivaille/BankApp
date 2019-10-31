@@ -78,6 +78,25 @@ void addAddressee(Map *acc_numbers, typeAccount *account)
     insertMap(account->addressees, new_addressee->account_number, new_addressee);
 }
 
+void deleteAddressee(typeAccount *account)
+{
+   char account_number[MAX_CARACT + 1];
+   typeAddressee *addressee;
+
+   printf("Ingrese el numero de cuenta: ");
+   scanf("%s", account_number);
+
+   while(searchMap(account->addressees, account_number) == NULL)
+   {
+       getchar();
+       printf("No se encontro un destinatario con el numero de cuenta ingresado, intente nuevamente: ");
+       scanf("%s", account_number);
+   }
+
+   addressee = (typeAddressee *) eraseKeyMap(account->addressees, account_number);
+   free(addressee);
+}
+
 void showAddressees(typeAccount *account)
 {
     typeAddressee *addressee = (typeAddressee *) firstMap(account->addressees);

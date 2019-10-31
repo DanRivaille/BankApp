@@ -21,6 +21,14 @@ void createAccount(Map *acc_numbers, typeClient *client, char account_type);
 void addAddressee(Map *acc_numbers, typeAccount *account);
 
 /**
+ * Procedimiento que elimina un destinatario de la cuenta, para ello lee el numero de cuenta del destinatario,
+ * valida que este agregado ya al mapa de destinatarios de la cuenta.
+ *
+ * @param account: puntero a typeAccount que contiene la informacion de la cuenta en donde se agregara el nuevo destinatario.
+ */
+void deleteAddressee(typeAccount *account);
+
+/**
  * Procedimiento que muestra los destinatarios guardados de la cuenta.
  *
  * @param account: puntero a typeAccount de la cuenta que contiene los destinatarios que se quieren mostrar.

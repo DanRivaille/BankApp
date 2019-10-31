@@ -7,6 +7,7 @@
 
 #include "typesData.h"
 #include "fileFunctions.h"
+#include "auxiliaryFunctions.h"
 #include "adminOptions.h"
 
 /** Prototipos de funciones estaticas */
