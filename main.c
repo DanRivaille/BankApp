@@ -14,22 +14,23 @@
 #include "Libraries/adminOptions.h"
 #include "Libraries/clientOptions.h"
 #include "Libraries/login.h"
+#include "Libraries/auxiliaryFunctions.h"
 
 #define ADMIN_PROFILE 1
 #define CLIENT_PROFILE 2
 
-int mainMenu(void);                              //menu en donde se eligira el tipo de perfil (administrador o cliente)
-void mainMenuAdmin(Map *acc_numbers);            //menu con opciones del administrador
-void mainMenuClient(Map *acc_numbers);           //menu con opciones del cliente
-void optionsInfoClient(typeClient *client);      //mostrara la informacion del cliente y la opcion de actualizar dicha info
-void accessAccount(Map *acc_numbers, typeClient *client);          //menu que mostrara las cuentas del cliente
-void menuAccount(typeAccount * account);         //menu que mostrara informacion de la cuenta y la opcion de ver opciones
-void optionsAccount(void);                       //menu que mostrara las opciones disponible de la cuenta
-void optionsAddressees(void);                    //menu que mostrara las opciones disponible de los destinatarios de la cuenta
-void optionSearchClient(Map *clients_profiles);  //mostrara la informacion del usuario buscado y la opcion de agregarle un aviso
-void optionSearchAccount(Map *acc_numbers);      //mostrara la informacion de la cuenta buscada y la opcion de depositarle
-void validateAccount(Map *acc_numbers, typeClient *client);     //validara si la cuenta ingresada esta activa, si lo esta, llama a menuAccount
-void showAccount(typeAccount *account);         //mostrara la informacion de la cuenta buscada
+int mainMenu(void);                                           //eligira el tipo de perfil (administrador o cliente)
+void mainMenuAdmin(Map *acc_numbers);                         //opciones del administrador
+void mainMenuClient(Map *acc_numbers);                        //opciones del cliente
+void optionsInfoClient(typeClient *client);                   //mostrara la informacion del cliente y la opcion de actualizar
+void accessAccount(Map *acc_numbers, typeClient *client);     //menu que mostrara las cuentas del cliente
+void menuAccount(Map *acc_numbers, typeAccount * account);    //mostrara informacion de la cuenta y la opcion de ver opciones
+void optionsAccount(Map *acc_numbers, typeAccount *account);  //mostrara las opciones disponible de la cuenta
+void optionsAddressees(Map *acc_numbers, typeAccount *account);//mostrara las opciones disponible de los destinatarios
+void optionSearchClient(Map *clients_profiles);               //mostrara la informacion del usuario buscado y la opcion de agregarle un aviso
+void optionSearchAccount(Map *acc_numbers);                   //mostrara la informacion de la cuenta buscada y la opcion de depositarle
+void validateAccount(Map *acc_numbers, typeClient *client);   //validara si la cuenta ingresada esta activa
+void showAccount(typeAccount *account);                       //mostrara la informacion de la cuenta buscada
 
 int main()
 {
@@ -231,15 +232,15 @@ void accessAccount(Map *acc_numbers, typeClient *client)
 
         switch(option)
         {
-            case 1  : menuAccount(client->rut_account);             break;
-            case 2  : validateAccount(acc_numbers, client);         break;
-            case 3  : system("clear");                              break;
+            case 1  : menuAccount(acc_numbers, client->rut_account); break;
+            case 2  : validateAccount(acc_numbers, client);          break;
+            case 3  : system("clear");                               break;
             default : printf("Opcion ingresada no valida\n");
         }
     }while((option < 1) || (option > 3));
 }
 
-void menuAccount(typeAccount *account)
+void menuAccount(Map *acc_numbers, typeAccount *account)
 {
     int option;
     do
@@ -254,14 +255,14 @@ void menuAccount(typeAccount *account)
 
         switch(option)
         {
-            case 1  : optionsAccount();              break;
-            case 2  : system("clear");               break;
+            case 1  : optionsAccount(acc_numbers, account);   break;
+            case 2  : system("clear");                        break;
             default : printf("Opcion ingresada no valida\n");
         }
     }while(option != 2);
 }
 
-void optionsAccount(void)
+void optionsAccount(Map *acc_numbers, typeAccount *account)
 {
     int option;
 
@@ -281,14 +282,14 @@ void optionsAccount(void)
         {
             case 1  : printf("ver historial\n");                break;
             case 2  : printf("realizar transaccion\n");         break;
-            case 3  : optionsAddressees();                      break;
+            case 3  : optionsAddressees(acc_numbers, account);  break;
             case 4  : system("clear");                          break;
             default : printf("Opcion ingresada no valida\n");
         }
     }while(option != 4);
 }
 
-void optionsAddressees(void)
+void optionsAddressees(Map *acc_numbers, typeAccount *account)
 {
     int option;
 
@@ -307,13 +308,15 @@ void optionsAddressees(void)
 
         switch(option)
         {
-            case 1  : printf("mostrar destinatarios\n");             break;
-            case 2  : printf("mostrar destinatarios favoritos\n");   break;
-            case 3  : printf("agregar destinatarios\n");             break;
+            case 1  : showAddressees(account);                       break;
+            case 2  : showFavAddressees(account);                    break;
+            case 3  : addAddressee(acc_numbers, account);            break;
             case 4  : printf("eliminar destinatario\n");             break;
-            case 5  : system("clear");                               break;
+            case 5  : return ;                               break;
             default : printf("Opcion ingresada no valida\n");
         }
+        _pause();
+        system("clear");
     }while(option != 5);
 }
 
@@ -339,7 +342,7 @@ void validateAccount(Map *acc_numbers, typeClient *client)
             switch(option)
             {
                 case 1  : createAccount(acc_numbers, client, SAVING_ACC);
-                          menuAccount(client->saving_account);               break;
+                          menuAccount(acc_numbers, client->saving_account);  break;
                 case 2  : system("clear");                                   break;
                 default : printf("Opcion ingresada no valida\n");
             }
@@ -347,7 +350,7 @@ void validateAccount(Map *acc_numbers, typeClient *client)
     }
     else
     {
-        menuAccount(client->saving_account);
+        menuAccount(acc_numbers, client->saving_account);
     }
 }
 

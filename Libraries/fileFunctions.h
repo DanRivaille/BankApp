@@ -78,9 +78,4 @@ void saveAccount(typeClient *client, char account_type);
   */
 void validFileOpening(FILE *file);
 
-/**
- * Procedimiento que simula la funcion system("pause") de windos y limpia el buffer del teclado.
- */
-void _pause(void);
-
 #endif // FILE_FUNCTIONS_H
