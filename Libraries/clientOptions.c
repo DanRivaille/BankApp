@@ -58,7 +58,7 @@ static void createAccNumber(Map *acc_numbers, typeAccount *account)
         int i;
         for(i = 0; i < 8; i++)
         {
-            account->account_number[i] = (rand() % 11) + 48;
+            account->account_number[i] = (rand() % 10) + 48;
         }
         account->account_number[i] = '\0';
 

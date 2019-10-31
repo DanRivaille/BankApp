@@ -74,13 +74,13 @@ typeClient *clientLogin(Map *clients_profiles, Map *acc_numbers)
 static void firstClientLogin(typeClient *client, typeProfile *profile, Map *acc_numbers)
 {
     printf("Ingrese su nueva password: ");
-    scanf("%s", profile->pass);
+    scanf("%[^\n]s", profile->pass);
     getchar();
 
     while(validatePass(profile->pass) == false)
     {
         printf("Intentelo nuevamente: ");
-        scanf("%s", profile->pass);
+        scanf("%[^\n]s", profile->pass);
         getchar();
     }
     createAccount(acc_numbers, client, RUT_ACC);

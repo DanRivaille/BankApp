@@ -18,16 +18,18 @@
 #define ADMIN_PROFILE 1
 #define CLIENT_PROFILE 2
 
-int mainMenu(void);                             //menu en donde se eligira el tipo de perfil (administrador o cliente)
-void mainMenuAdmin(Map *acc_numbers);           //menu con opciones del administrador
-void mainMenuClient(Map *acc_numbers);          //menu con opciones del cliente
-void optionsInfoClient(void);                   //mostrara la informacion del cliente y la opcion de actualizar dicha info
-void accessAccount(void);                       //menu que mostrara las cuentas del cliente
-void menuAccount(void);                         //menu que mostrara informacion de la cuenta y la opcion de ver opciones
-void optionsAccount(void);                      //menu que mostrara las opciones disponible de la cuenta
-void optionsAddressees(void);                   //menu que mostrara las opciones disponible de los destinatarios de la cuenta
-void optionSearchClient(Map *clients_profiles);                  //mostrara la informacion del usuario buscado y la opcion de agregarle un aviso
-void optionSearchAccount(Map *acc_numbers);                 //mostrara la informacion de la cuenta buscada y la opcion de depositarle
+int mainMenu(void);                              //menu en donde se eligira el tipo de perfil (administrador o cliente)
+void mainMenuAdmin(Map *acc_numbers);            //menu con opciones del administrador
+void mainMenuClient(Map *acc_numbers);           //menu con opciones del cliente
+void optionsInfoClient(typeClient *client);      //mostrara la informacion del cliente y la opcion de actualizar dicha info
+void accessAccount(Map *acc_numbers, typeClient *client);          //menu que mostrara las cuentas del cliente
+void menuAccount(typeAccount * account);         //menu que mostrara informacion de la cuenta y la opcion de ver opciones
+void optionsAccount(void);                       //menu que mostrara las opciones disponible de la cuenta
+void optionsAddressees(void);                    //menu que mostrara las opciones disponible de los destinatarios de la cuenta
+void optionSearchClient(Map *clients_profiles);  //mostrara la informacion del usuario buscado y la opcion de agregarle un aviso
+void optionSearchAccount(Map *acc_numbers);      //mostrara la informacion de la cuenta buscada y la opcion de depositarle
+void validateAccount(Map *acc_numbers, typeClient *client);     //validara si la cuenta ingresada esta activa, si lo esta, llama a menuAccount
+void showAccount(typeAccount *account);         //mostrara la informacion de la cuenta buscada
 
 int main()
 {
@@ -111,7 +113,7 @@ void optionSearchClient(Map *clients_profiles)
     int option;
     do
     {
-        printf("Nombre: %s      Rut: %s\n\n", client->name, client->rut);
+        showClient(client);
         printf("1 - agregar aviso\n");
         printf("2 - Volver\n\n");
 
@@ -155,8 +157,11 @@ void optionSearchAccount(Map *acc_numbers)
 
 void mainMenuClient(Map *acc_numbers)
 {
-    int option;
+    Map *clients_profiles = loadProfiles("clients.txt");
+    typeClient *client = clientLogin(clients_profiles, acc_numbers);
+    system("clear");
 
+    int option;
     do
     {
         printf("Menu Cliente\n\n");
@@ -171,22 +176,28 @@ void mainMenuClient(Map *acc_numbers)
 
         switch(option)
         {
-            case 1  : optionsInfoClient();                break;
-            case 2  : accessAccount();                    break;
-            case 3  : printf("ver avisos\n");             break;
-            case 4  : printf("Sesion finalizada\n");      break;
+            case 1  : optionsInfoClient(client);                break;
+            case 2  : accessAccount(acc_numbers, client);       break;
+            case 3  : printf("ver avisos\n");                   break;
+            case 4  : printf("Sesion finalizada\n");            break;
             default : printf("Opcion ingresada no valida\n");
         }
     }while(option != 4);
+
+    if(client->saving_account != NULL)
+        saveAccount(client, SAVING_ACC);
+
+    saveAccount(client, RUT_ACC);
+    saveClientInfo(client);
+    saveProfiles(clients_profiles, "clients.txt");
 }
 
-void optionsInfoClient(void)
+void optionsInfoClient(typeClient *client)
 {
     int option;
-
     do
     {
-        printf("Mi Informacion\n\n");
+        showClient(client);
         printf("1 - Actualizar info\n");
         printf("2 - Volver\n\n");
 
@@ -203,7 +214,7 @@ void optionsInfoClient(void)
     }while(option != 2);
 }
 
-void accessAccount(void)
+void accessAccount(Map *acc_numbers, typeClient *client)
 {
     int option;
 
@@ -220,21 +231,20 @@ void accessAccount(void)
 
         switch(option)
         {
-            case 1  : printf("cuenta rut\n");       menuAccount();     break;
-            case 2  : printf("cuenta de ahorro\n"); menuAccount();     break;
-            case 3  : system("clear");              break;
+            case 1  : menuAccount(client->rut_account);             break;
+            case 2  : validateAccount(acc_numbers, client);         break;
+            case 3  : system("clear");                              break;
             default : printf("Opcion ingresada no valida\n");
         }
     }while((option < 1) || (option > 3));
 }
 
-void menuAccount(void)
+void menuAccount(typeAccount *account)
 {
     int option;
-
     do
     {
-        printf("Cuenta ---\n\n");
+        showAccount(account);
         printf("1 - Ver opciones\n");
         printf("2 - Volver\n\n");
 
@@ -305,4 +315,50 @@ void optionsAddressees(void)
             default : printf("Opcion ingresada no valida\n");
         }
     }while(option != 5);
+}
+
+/**
+ * Procedimiento que valida que la cuenta ingresada esta activa, si lo esta llama a menuAccount, sino le pregunta al cliente
+ * si desea crearla.
+ */
+void validateAccount(Map *acc_numbers, typeClient *client)
+{
+    if(client->saving_account == NULL)
+    {
+        int option;
+        do
+        {
+            printf("La cuenta seleccionada no esta activa, si lo decide puede crearla\n\n");
+            printf("1 - Crear cuenta\n");
+            printf("2 - Volver\n\n");
+
+            printf("Ingrese una opcion: ");
+            scanf("%i", &option);
+            system("clear");
+
+            switch(option)
+            {
+                case 1  : createAccount(acc_numbers, client, SAVING_ACC);
+                          menuAccount(client->saving_account);               break;
+                case 2  : system("clear");                                   break;
+                default : printf("Opcion ingresada no valida\n");
+            }
+        }while((option != 2) && (option != 1));
+    }
+    else
+    {
+        menuAccount(client->saving_account);
+    }
+}
+
+void showAccount(typeAccount *account)
+{
+    printf("Numero de cuenta:   %s\n", account->account_number);
+
+    if(account->account_type == RUT_ACC)
+        printf("Tipo de Cuenta:     Cuenta Rut\n");
+    else
+        printf("Tipo de Cuenta:     Cuenta de Ahorros\n");
+
+    printf("\nSaldo:    %lu\n\n\n\n\n", account->balance);
 }

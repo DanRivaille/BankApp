@@ -98,13 +98,13 @@ void showClient(typeClient *client)
 {
     printf("Nombre: %s\n", client->name);
     printf("Rut:    %s\n", client->rut);
-    printf("Cuentas activas:\n");
+    printf("Cuentas activas:\n\n");
 
     if(client->rut_account != NULL)
-        printf("Cuenta Rut\n");
+        printf("\t-Cuenta Rut\n\n");
 
     if(client->saving_account != NULL)
-        printf("Cuenta Ahorro\n");
+        printf("\t-Cuenta Ahorro\n\n");
 }
 
 static typeProfile *createProfile(char new_rut[])
