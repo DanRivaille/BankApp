@@ -136,10 +136,13 @@ void optionSearchClient(Map *clients_profiles)
 
 void optionSearchAccount(Map *acc_numbers)
 {
+    typeAddressee *addressee = searchAccNumber(acc_numbers);
+    system("clear");
+
     int option;
     do
     {
-        printf("Buscar cuenta\n\n");
+        printf("Titular: %s     |   Rut:%s\n", addressee->name, addressee->rut);
         printf("1 - Depositar\n");
         printf("2 - Volver\n\n");
 
@@ -280,12 +283,13 @@ void optionsAccount(Map *acc_numbers, typeAccount *account)
 
         switch(option)
         {
-            case 1  : printf("ver historial\n");                break;
+            case 1  : showHistory(account);                     break;
             case 2  : printf("realizar transaccion\n");         break;
             case 3  : optionsAddressees(acc_numbers, account);  break;
             case 4  : system("clear");                          break;
             default : printf("Opcion ingresada no valida\n");
         }
+        system("clear");
     }while(option != 4);
 }
 

@@ -9,6 +9,7 @@
 #include "TDA-Map/Map.h"
 #include "typesData.h"
 #include "fileFunctions.h"
+#include "auxiliaryFunctions.h"
 #include "clientOptions.h"
 
 /** Prototipos de funciones estaticas */
@@ -48,6 +49,21 @@ void createAccount(Map *acc_numbers, typeClient *client, char account_type)
     insertMap(acc_numbers, new_acc_number->account_number, new_acc_number);
 
     createAccFiles(client, new_account);
+}
+
+void showHistory(typeAccount *account)
+{
+    typeTransaction *transaction;
+    transaction = (typeTransaction *) firstList(account->transactions_history);;
+
+    while(transaction != NULL)
+    {
+        printf("Numero de cuenta: %s | Monto: %li", transaction->associated_acount->account_number, transaction->amount);
+        printf(" | %i/%i/%i\n", transaction->date->day, transaction->date->month, transaction->date->year);
+
+        transaction = (typeTransaction *) nextList(account->transactions_history);
+    }
+    _pause();
 }
 
 void addAddressee(Map *acc_numbers, typeAccount *account)

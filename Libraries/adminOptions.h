@@ -31,6 +31,15 @@ void removeClient(Map *profiles);
 typeClient *searchClientRut(Map *clients_profiles);
 
 /**
+ * Funcion que lee un rut, y lo busca en el mapa de clientes, si no lo encuentra imprime una advertencia y lo vuelve a
+ * leer, si lo encuentra lo retorna.
+ *
+ * @param acc_numbers: mapa que contiene las cuentas guardadas en el sistema,
+ * @return puntero al registro correspondiente a la cuenta buscada.
+ */
+typeAddressee *searchAccNumber(Map *acc_numbers);
+
+/**
  * Procedimiento que lee un nuevo aviso, y lo guarda en el archivo "notices.txt" en la carpeta del cliente, ademas incrementa
  * en contador de la cantidad de avisos en "client-info.txt".
  *

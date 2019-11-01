@@ -12,6 +12,13 @@
 void createAccount(Map *acc_numbers, typeClient *client, char account_type);
 
 /**
+ * Procedimiento que muestra el historial de movimientos (transacciones y depositos) de la cuenta.
+ *
+ * @param account: puntero a typeAccount de la cuenta que se quiere visualizar el historial.
+ */
+void showHistory(typeAccount *account);
+
+/**
  * Procedimiento que agrega un nuevo destinatario a la cuenta, para ello lee el numero de cuenta del nuevo destinatario,
  * valida que este en el sistema y no este agregado ya al mapa de destinatarios de la cuenta.
  *

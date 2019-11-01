@@ -59,19 +59,37 @@ typeClient* searchClientRut(Map *clients_profiles)
 
     printf("Ingrese el rut del cliente a buscar: ");
     scanf("%s", rut);
-    getchar();
 
     while(searchMap(clients_profiles, rut) == NULL)
     {
+        getchar();
         printf("No se encontro un perfil que coincida con el rut ingresado\n");
         printf("Intente nuevamente: ");
         scanf("%s", rut);
-        getchar();
     }
 
     typeClient *client = loadClientInfo(rut);
 
     return client;
+}
+
+typeAddressee *searchAccNumber(Map *acc_numbers)
+{
+    char number[MAX_CARACT + 1];
+    typeAddressee *account_owner;
+
+    printf("Ingrese el numero de cuenta a buscar: ");
+    scanf("%s", number);
+
+    while((account_owner = (typeAddressee *) searchMap(acc_numbers, number)) == NULL)
+    {
+        getchar();
+        printf("No se encontro una cuenta que coincida con el numero de cuenta ingresado\n");
+        printf("Intente nuevamente: ");
+        scanf("%s", number);
+    }
+
+    return account_owner;
 }
 
 void addNotice(typeClient *client)
