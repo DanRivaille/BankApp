@@ -17,6 +17,9 @@ static void saveAccInfo(typeAccount *account, char client_path[]);
 static void saveAccHistory(typeAccount *account, char client_path[]);
 static void saveAccAddressees(typeAccount *account, char client_path[]);
 
+static char *setClientPath(char rut[]);
+static char *setAccPath(char rut[], char account_type);
+
 Map *loadProfiles(char file_name[])
 {
     char file_path[MAX_PATH + 1] = "Data//Profiles//";          //ruta del archivo a abrir
@@ -66,9 +69,8 @@ void saveProfiles(Map *profiles, char file_name[])
 
 typeClient *loadClientInfo(char rut[])
 {
-    char client_path[MAX_PATH + 1] = "Data//Users//";
-    strcat(client_path, rut);
-    strcat(client_path, "//client-info.txt");
+    char *client_path = setClientPath(rut);
+    strcat(client_path, "client-info.txt");
 
     FILE *client_file = fopen(client_path, "r");
     validFileOpening(client_file);
@@ -91,15 +93,15 @@ typeClient *loadClientInfo(char rut[])
     client->notices = atoi(strtok(NULL, "\n"));
 
     fclose(client_file);
+    free(client_path);
 
     return client;
 }
 
 void saveClientInfo(typeClient *client)
 {
-    char file_path[MAX_PATH + 1] = "Data//Users//";
-    strcat(file_path, client->rut);
-    strcat(file_path, "//client-info.txt");
+    char *file_path = setClientPath(client->rut);
+    strcat(file_path, "client-info.txt");
 
     FILE *client_file = fopen(file_path, "w");
     validFileOpening(client_file);
@@ -118,6 +120,7 @@ void saveClientInfo(typeClient *client)
 
     fprintf(client_file, "%i\n", client->notices);
     fclose(client_file);
+    free(file_path);
 }
 
 Map *loadAccNumbers(void)
@@ -169,54 +172,27 @@ void saveAccNumbers(Map *acc_numbers)
     fclose(acc_file);
 }
 
-void loadAccount(typeClient *client, char account_type)
+void loadAccount(typeAccount *account, char rut[], char account_type)
 {
-    char client_path[MAX_PATH + 1] = "Data//Users//";
-    strcat(client_path, client->rut);
-    strcat(client_path, "//");
-
-    typeAccount *account;
-
-    if(account_type == RUT_ACC)
-    {
-        strcat(client_path, "rut-acc//");
-        account = client->rut_account;
-    }
-    else
-    {
-        strcat(client_path, "saving-acc//");
-        account = client->saving_account;
-    }
-
+    char *client_path = setAccPath(rut, account_type);
     account->account_type = account_type;
 
     loadAccInfo(account, client_path);
     loadAccHistory(account, client_path);
     loadAccAddressees(account, client_path);
+
+    free(client_path);
 }
 
-void saveAccount(typeClient *client, char account_type)
+void saveAccount(typeAccount *account, char rut[])
 {
-    char client_path[MAX_PATH + 1] = "Data//Users//";
-    strcat(client_path, client->rut);
-    strcat(client_path, "//");
-
-    typeAccount *account;
-
-    if(account_type == RUT_ACC)
-    {
-        strcat(client_path, "rut-acc//");
-        account = client->rut_account;
-    }
-    else
-    {
-        strcat(client_path, "saving-acc//");
-        account = client->saving_account;
-    }
+    char *client_path = setAccPath(rut, account->account_type);
 
     saveAccInfo(account, client_path);
     saveAccAddressees(account, client_path);
     saveAccHistory(account, client_path);
+
+    free(client_path);
 }
 
 void validFileOpening(FILE *file)
@@ -413,4 +389,27 @@ static void saveAccAddressees(typeAccount *account, char client_path[])
     }
 
     fclose(addressees_file);
+}
+
+static char *setClientPath(char rut[])
+{
+    char *client_path = (char *) calloc(MAX_PATH, sizeof(char));
+
+    strcpy(client_path, "Data//Users//");
+    strcat(client_path, rut);
+    strcat(client_path, "//");
+
+    return client_path;
+}
+
+static char *setAccPath(char rut[], char account_type)
+{
+    char *acc_path = setClientPath(rut);
+
+    if(account_type == RUT_ACC)
+        strcat(acc_path, "rut-acc//");
+    else
+        strcat(acc_path, "saving-acc//");
+
+    return acc_path;
 }

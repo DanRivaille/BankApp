@@ -62,10 +62,10 @@ typeClient *clientLogin(Map *clients_profiles, Map *acc_numbers)
     if(client->rut_account == NULL)
         firstClientLogin(client, profile, acc_numbers);
     else
-        loadAccount(client, RUT_ACC);
+        loadAccount(client->rut_account, client->rut, RUT_ACC);
 
     if(client->saving_account != NULL)
-        loadAccount(client, SAVING_ACC);
+        loadAccount(client->saving_account, client->rut, SAVING_ACC);
 
     return client;
 }

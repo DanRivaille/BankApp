@@ -189,9 +189,9 @@ void mainMenuClient(Map *acc_numbers)
     }while(option != 4);
 
     if(client->saving_account != NULL)
-        saveAccount(client, SAVING_ACC);
+        saveAccount(client->saving_account, client->rut);
 
-    saveAccount(client, RUT_ACC);
+    saveAccount(client->rut_account, client->rut);
     saveClientInfo(client);
     saveProfiles(clients_profiles, "clients.txt");
 }
