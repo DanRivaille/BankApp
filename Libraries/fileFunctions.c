@@ -10,15 +10,10 @@
 /** Prototipos de funciones estaticas */
 static typeTransaction *createTransaction(char line[]);
 static typeAddressee *createAddresse(char line[]);
-static void loadAccInfo(typeAccount *account, char client_path[]);
-static void loadAccHistory(typeAccount *account, char client_path[]);
-static void loadAccAddressees(typeAccount *account, char client_path[]);
-static void saveAccInfo(typeAccount *account, char client_path[]);
-static void saveAccHistory(typeAccount *account, char client_path[]);
-static void saveAccAddressees(typeAccount *account, char client_path[]);
-
-static char *setClientPath(char rut[]);
-static char *setAccPath(char rut[], char account_type);
+static void loadAccHistory(typeAccount *account, char acc_path[]);
+static void loadAccAddressees(typeAccount *account, char acc_path[]);
+static void saveAccHistory(typeAccount *account, char acc_path[]);
+static void saveAccAddressees(typeAccount *account, char acc_path[]);
 
 Map *loadProfiles(char file_name[])
 {
@@ -174,25 +169,25 @@ void saveAccNumbers(Map *acc_numbers)
 
 void loadAccount(typeAccount *account, char rut[], char account_type)
 {
-    char *client_path = setAccPath(rut, account_type);
+    char *acc_path = setAccPath(rut, account_type);
     account->account_type = account_type;
 
-    loadAccInfo(account, client_path);
-    loadAccHistory(account, client_path);
-    loadAccAddressees(account, client_path);
+    loadAccInfo(account, acc_path);
+    loadAccHistory(account, acc_path);
+    loadAccAddressees(account, acc_path);
 
-    free(client_path);
+    free(acc_path);
 }
 
 void saveAccount(typeAccount *account, char rut[])
 {
-    char *client_path = setAccPath(rut, account->account_type);
+    char *acc_path = setAccPath(rut, account->account_type);
 
-    saveAccInfo(account, client_path);
-    saveAccAddressees(account, client_path);
-    saveAccHistory(account, client_path);
+    saveAccInfo(account, acc_path);
+    saveAccAddressees(account, acc_path);
+    saveAccHistory(account, acc_path);
 
-    free(client_path);
+    free(acc_path);
 }
 
 void validFileOpening(FILE *file)
@@ -242,10 +237,10 @@ static typeAddressee *createAddresse(char line[])
     return new_addressee;
 }
 
-static void loadAccInfo(typeAccount *account, char client_path[])
+void loadAccInfo(typeAccount *account, char acc_path[])
 {
     char file_path[MAX_PATH + 1];
-    strcpy(file_path, client_path);
+    strcpy(file_path, acc_path);
     strcat(file_path, "acc-info.txt");
 
     FILE *info_file = fopen(file_path, "r");
@@ -260,10 +255,10 @@ static void loadAccInfo(typeAccount *account, char client_path[])
     fclose(info_file);
 }
 
-static void loadAccHistory(typeAccount *account, char client_path[])
+static void loadAccHistory(typeAccount *account, char acc_path[])
 {
     char file_path[MAX_PATH + 1];
-    strcpy(file_path, client_path);
+    strcpy(file_path, acc_path);
     strcat(file_path, "history-file.txt");
 
     FILE *history_file = fopen(file_path, "r");
@@ -286,10 +281,10 @@ static void loadAccHistory(typeAccount *account, char client_path[])
     fclose(history_file);
 }
 
-static void loadAccAddressees(typeAccount *account, char client_path[])
+static void loadAccAddressees(typeAccount *account, char acc_path[])
 {
     char file_path[MAX_PATH + 1];
-    strcpy(file_path, client_path);
+    strcpy(file_path, acc_path);
     strcat(file_path, "addressees-file.txt");
 
     FILE *addressees_file = fopen(file_path, "r");
@@ -312,10 +307,10 @@ static void loadAccAddressees(typeAccount *account, char client_path[])
     fclose(addressees_file);
 }
 
-static void saveAccInfo(typeAccount *account, char client_path[])
+void saveAccInfo(typeAccount *account, char acc_path[])
 {
     char file_path[MAX_PATH + 1];
-    strcpy(file_path, client_path);
+    strcpy(file_path, acc_path);
     strcat(file_path, "acc-info.txt");
 
     FILE *info_file = fopen(file_path, "w");
@@ -326,10 +321,10 @@ static void saveAccInfo(typeAccount *account, char client_path[])
     fclose(info_file);
 }
 
-static void saveAccHistory(typeAccount *account, char client_path[])
+static void saveAccHistory(typeAccount *account, char acc_path[])
 {
     char file_path[MAX_PATH + 1];
-    strcpy(file_path, client_path);
+    strcpy(file_path, acc_path);
     strcat(file_path, "history-file.txt");
 
     FILE *history_file = fopen(file_path, "w");
@@ -360,10 +355,10 @@ static void saveAccHistory(typeAccount *account, char client_path[])
     fclose(history_file);
 }
 
-static void saveAccAddressees(typeAccount *account, char client_path[])
+static void saveAccAddressees(typeAccount *account, char acc_path[])
 {
     char file_path[MAX_PATH + 1];
-    strcpy(file_path, client_path);
+    strcpy(file_path, acc_path);
     strcat(file_path, "addressees-file.txt");
 
     FILE *addressees_file = fopen(file_path, "w");
@@ -391,7 +386,7 @@ static void saveAccAddressees(typeAccount *account, char client_path[])
     fclose(addressees_file);
 }
 
-static char *setClientPath(char rut[])
+char *setClientPath(char rut[])
 {
     char *client_path = (char *) calloc(MAX_PATH, sizeof(char));
 
@@ -402,7 +397,7 @@ static char *setClientPath(char rut[])
     return client_path;
 }
 
-static char *setAccPath(char rut[], char account_type)
+char *setAccPath(char rut[], char account_type)
 {
     char *acc_path = setClientPath(rut);
 

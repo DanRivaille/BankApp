@@ -136,13 +136,19 @@ void optionSearchClient(Map *clients_profiles)
 
 void optionSearchAccount(Map *acc_numbers)
 {
-    typeAddressee *addressee = searchAccNumber(acc_numbers);
+    typeAddressee *account_owner = searchAccNumber(acc_numbers);
     system("clear");
+
+    char *acc_path = setAccPath(account_owner->rut, account_owner->account_type);
+    typeAccount *account = (typeAccount *) calloc(1, sizeof(typeAccount));
+    loadAccInfo(account, acc_path);
 
     int option;
     do
     {
-        printf("Titular: %s     |   Rut:%s\n", addressee->name, addressee->rut);
+        printf("Titular: %s     |   Rut:%s  |", account_owner->name, account_owner->rut);
+        printf("   Numero de cuenta: %s\n\n", account_owner->account_number);
+        printf("Saldo: %lu\n\n", account->balance);
         printf("1 - Depositar\n");
         printf("2 - Volver\n\n");
 
@@ -157,6 +163,10 @@ void optionSearchAccount(Map *acc_numbers)
             default : printf("Opcion ingresada no valida\n");
         }
     }while(option != 2);
+
+    saveAccInfo(account, acc_path);
+    free(acc_path);
+    free(account);
 }
 
 void mainMenuClient(Map *acc_numbers)

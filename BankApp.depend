@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1572624502 source:/home/dan_santos/Documentos/Repositorios/BankApp/main.c
+1572731291 source:/home/dan_santos/Documentos/Repositorios/BankApp/main.c
 	<stdio.h>
 	<stdlib.h>
 	"Libraries/TDA-List/List.h"
@@ -66,7 +66,7 @@
 	"auxiliaryFunctions.h"
 	"clientOptions.h"
 
-1572628629 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.c
+1572729820 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.c
 	<string.h>
 	<stdio.h>
 	<stdlib.h>
@@ -75,7 +75,7 @@
 	"TDA-Map/Map.h"
 	"fileFunctions.h"
 
-1572627035 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.h
+1572729880 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/fileFunctions.h
 
 1572560572 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/adminOptions.h
 
@@ -93,9 +93,12 @@
 
 1572558594 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/clientOptions.h
 
-1572556816 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/auxiliaryFunctions.c
+1572731276 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/auxiliaryFunctions.c
 	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"typesData.h"
 	"auxiliaryFunctions.h"
 
-1572556728 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/auxiliaryFunctions.h
+1572731125 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/auxiliaryFunctions.h
 

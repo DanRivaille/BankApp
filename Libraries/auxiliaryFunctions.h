@@ -11,4 +11,11 @@ void _pause(void);
  */
 void _cleanBuffer(void);
 
+/**
+ * Funcion obtiene la fecha actual del computador.
+ *
+ * @return puntero al registro Date con la fecha actual.
+ */
+Date *getCurrentDate(void);
+
 #endif // AUXILIARY_FUNCTIONS_H

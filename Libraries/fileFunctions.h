@@ -78,4 +78,39 @@ void saveAccount(typeAccount *account, char rut[]);
   */
 void validFileOpening(FILE *file);
 
+/**
+ * Procedimiento que carga la informacion (saldo y num de cuenta) de la cuenta en el archivo "acc-info.txt",
+ * en la carpeta correspondiente.
+ *
+ * @param account: puntero que contiene la informacion de la cuenta a cargar
+ * @param acc_path: cadena que contiene la ruta de la carpeta de la cuenta.
+ */
+void loadAccInfo(typeAccount *account, char acc_path[]);
+
+/**
+ * Procedimiento que guarda la informacion (saldo y num de cuenta) de la cuenta en el archivo "acc-info.txt",
+ * en la carpeta correspondiente.
+ *
+ * @param account: puntero que contiene la informacion de la cuenta a guardar
+ * @param acc_path: cadena que contiene la ruta de la carpeta de la cuenta.
+ */
+void saveAccInfo(typeAccount *account, char acc_path[]);
+
+/**
+ * Funcion que establece la ruta de la carpeta del cliente con el rut ingresado.
+ *
+ * @param rut: rut del cliente titular de la cuenta.
+ * @return puntero a la cadena que contiene la ruta de la carpeta del cliente.
+ */
+char *setClientPath(char rut[]);
+
+/**
+ * Funcion que establece la ruta de la carpeta de la cuenta (account_type) del cliente con el rut ingresado.
+ *
+ * @param rut: rut del cliente titular de la cuenta.
+ * @param account_type: tipo de cuenta a cargar.
+ * @return puntero a la cadena que contiene la ruta de la carpeta de la cuenta.
+ */
+char *setAccPath(char rut[], char account_type);
+
 #endif // FILE_FUNCTIONS_H
