@@ -36,6 +36,16 @@ void addAddressee(Map *acc_numbers, typeAccount *account);
 void deleteAddressee(typeAccount *account);
 
 /**
+ * Procedimiento que muestra la opciones que tiene el cliente para elegir el destinatario de la transferencia y lee el monto
+ * a tranferir, luego realiza la transaccion entre las cuentas y guarda el detalle en el historial de transacciones de cada
+ * cuenta.
+ *
+ * @param acc_numbers: mapa que contendra los numeros de cuenta validos, se usara si el cliente quiere transferir a terceros.
+ * @param account: informacion de la cuenta que va a transferir.
+ */
+void menuTransaction(Map *acc_numbers, typeAccount *account);
+
+/**
  * Procedimiento que muestra los destinatarios guardados de la cuenta.
  *
  * @param account: puntero a typeAccount de la cuenta que contiene los destinatarios que se quieren mostrar.

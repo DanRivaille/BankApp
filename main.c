@@ -26,6 +26,8 @@ void optionsInfoClient(typeClient *client);                   //mostrara la info
 void accessAccount(Map *acc_numbers, typeClient *client);     //menu que mostrara las cuentas del cliente
 void menuAccount(Map *acc_numbers, typeAccount * account);    //mostrara informacion de la cuenta y la opcion de ver opciones
 void optionsAccount(Map *acc_numbers, typeAccount *account);  //mostrara las opciones disponible de la cuenta
+void menuTransaction(Map *acc_numbers, typeAccount *account); //se eligira la cuenta destino y el monto a transferir
+typeAddressee *setDestination(Map *acc_numbers, typeAccount *account); //se eligira la cuenta destino
 void optionsAddressees(Map *acc_numbers, typeAccount *account);//mostrara las opciones disponible de los destinatarios
 void optionSearchClient(Map *clients_profiles);               //mostrara la informacion del usuario buscado y la opcion de agregarle un aviso
 void optionSearchAccount(Map *acc_numbers);                   //mostrara la informacion de la cuenta buscada y la opcion de depositarle
@@ -141,14 +143,17 @@ void optionSearchAccount(Map *acc_numbers)
 
     char *acc_path = setAccPath(account_owner->rut, account_owner->account_type);
     typeAccount *account = (typeAccount *) calloc(1, sizeof(typeAccount));
+    account->account_type = account_owner->account_type;
     loadAccInfo(account, acc_path);
 
     int option;
     do
     {
-        printf("Titular: %s     |   Rut:%s  |", account_owner->name, account_owner->rut);
+        system("clear");
+        printf("Titular: %s     |   Rut: %s  |", account_owner->name, account_owner->rut);
         printf("   Numero de cuenta: %s\n\n", account_owner->account_number);
         printf("Saldo: %lu\n\n", account->balance);
+
         printf("1 - Depositar\n");
         printf("2 - Volver\n\n");
 
@@ -158,7 +163,7 @@ void optionSearchAccount(Map *acc_numbers)
 
         switch(option)
         {
-            case 1  : printf("despositar\n");                    break;
+            case 1  : makeDeposit(account, account_owner->rut);  break;
             case 2  : system("clear");                           break;
             default : printf("Opcion ingresada no valida\n");
         }
@@ -294,7 +299,7 @@ void optionsAccount(Map *acc_numbers, typeAccount *account)
         switch(option)
         {
             case 1  : showHistory(account);                     break;
-            case 2  : printf("realizar transaccion\n");         break;
+            case 2  : menuTransaction(acc_numbers, account);    break;
             case 3  : optionsAddressees(acc_numbers, account);  break;
             case 4  : system("clear");                          break;
             default : printf("Opcion ingresada no valida\n");

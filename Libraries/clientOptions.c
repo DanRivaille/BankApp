@@ -16,6 +16,11 @@
 static void createAccNumber(Map *acc_numbers, typeAccount *account);
 static void createAccFiles(typeClient *client, typeAccount *account);
 static void readAccountNumber(Map *acc_numbers, typeAccount *account, typeAddressee *new_addressee);
+static typeAddressee *setDestination(Map *acc_numbers, typeAccount *account);
+static typeAddressee *transferFavorite(typeAccount *account);
+static typeAddressee *transferAddressee(typeAccount *account);
+static typeAddressee *tranferAccount(Map *acc_numbers);
+static void makeTransaction(typeAccount *origin_acc, typeAddressee *dest_owner, long int amount);
 
 void createAccount(Map *acc_numbers, typeClient *client, char account_type)
 {
@@ -51,10 +56,56 @@ void createAccount(Map *acc_numbers, typeClient *client, char account_type)
     createAccFiles(client, new_account);
 }
 
+void menuTransaction(Map *acc_numbers, typeAccount *account)
+{
+    typeAddressee *destination_owner = setDestination(acc_numbers, account);
+
+    long int amount;
+    printf("Ingrese el monto a transferir: ");
+    scanf("%li", &amount);
+
+    while((amount < 1) && (amount > account->balance))
+    {
+        printf("Monto ingresado no valido, intetelo nuevamente: ");
+        scanf("%li", &amount);
+    }
+
+    makeTransaction(account, destination_owner, amount);
+}
+
+static typeAddressee *setDestination(Map *acc_numbers, typeAccount *account)
+{
+    typeAddressee *destination_owner;
+    int option;
+
+    do
+    {
+        printf("Elegir cuenta destino\n\n");
+        printf("1 - Destinatarios favoritos\n");
+        printf("2 - Destinatarios\n");
+        printf("3 - A terceros\n");
+
+        printf("Ingrese una opcion: ");
+        scanf("%i", &option);
+        system("clear");
+
+        switch(option)
+        {
+            case 1  : destination_owner = transferFavorite(account);    break;
+            case 2  : destination_owner = transferAddressee(account);   break;
+            case 3  : destination_owner = tranferAccount(acc_numbers);  break;
+            default : printf("Opcion ingresada no valida\n");
+        }
+        system("clear");
+    }while((option < 1) || (option > 3));
+
+    return destination_owner;
+}
+
 void showHistory(typeAccount *account)
 {
     typeTransaction *transaction;
-    transaction = (typeTransaction *) firstList(account->transactions_history);;
+    transaction = (typeTransaction *) firstList(account->transactions_history);
 
     while(transaction != NULL)
     {
@@ -199,4 +250,103 @@ static void readAccountNumber(Map *acc_numbers, typeAccount *account, typeAddres
 
     strcpy(new_addressee->rut, addressee_saved->rut);
     new_addressee->account_type = addressee_saved->account_type;
+}
+
+static typeAddressee *transferFavorite(typeAccount *account)
+{
+    typeAddressee *destination_owner;
+    char acc_number[MAX_CARACT + 1];
+
+    showFavAddressees(account);
+
+    printf("Ingrese el numero de cuenta: ");
+    scanf("%s", acc_number);
+
+    while((destination_owner = (typeAddressee *) searchMap(account->addressees, acc_number)) == NULL)
+    {
+        getchar();
+        printf("El numero de cuenta ingresado no es valido, intenten nuevamente: ");
+        scanf("%s", acc_number);
+    }
+
+    return destination_owner;
+}
+
+static typeAddressee *transferAddressee(typeAccount *account)
+{
+    typeAddressee *destination_owner;
+    char acc_number[MAX_CARACT + 1];
+
+    showAddressees(account);
+
+    printf("Ingrese el numero de cuenta: ");
+    scanf("%s", acc_number);
+
+    while((destination_owner = (typeAddressee *) searchMap(account->addressees, acc_number)) == NULL)
+    {
+        getchar();
+        printf("El numero de cuenta ingresado no es valido, intenten nuevamente: ");
+        scanf("%s", acc_number);
+    }
+
+    return destination_owner;
+}
+
+static typeAddressee *tranferAccount(Map *acc_numbers)
+{
+    typeAddressee *destination_owner;
+    char acc_number[MAX_CARACT + 1];
+
+    printf("Ingrese el numero de cuenta: ");
+    scanf("%s", acc_number);
+
+    while((destination_owner = (typeAddressee *) searchMap(acc_numbers, acc_number)) == NULL)
+    {
+        getchar();
+        printf("El numero de cuenta ingresado no es valido, intenten nuevamente: ");
+        scanf("%s", acc_number);
+    }
+
+    return destination_owner;
+}
+
+static void makeTransaction(typeAccount *origin_acc, typeAddressee *dest_owner, long int amount)
+{
+    char *acc_path;                                         //cadena que guardara la ruta de la carpeta de la cuenta destino
+    typeAccount *dest_acc;                                  //guardara la informacion de la cuenta destino
+
+    acc_path = setAccPath(dest_owner->rut, dest_owner->account_type); //se establece la ruta de la carpeta de la cuenta destino
+    dest_acc = (typeAccount *) calloc(1, sizeof(typeAccount));        //se le asigna espacio a la cuenta destino
+    dest_acc->account_type = dest_owner->account_type;                //se inicializa el tipo de cuenta de la cuenta destino
+    loadAccInfo(dest_acc, acc_path);                                  //se carga la informacion de la cuenta destino
+
+    origin_acc->balance -= amount;                          //se decrementa la cantidad ingresada en la cuenta origen
+    dest_acc->balance += amount;                            //se deposita la cantidad ingresada en la cuenta destino
+
+    char *file_path = setAccPath(dest_owner->rut, dest_acc->account_type);
+    strcat(file_path, "history-file.txt");                  //se establece la ruta del archivo "history.txt" de la cuenta destino
+
+    FILE *history_file = fopen(file_path, "a");             //se abre el archivo en modo adicion
+    validFileOpening(history_file);
+
+    Date *current_date = getCurrentDate();                  //se obtiene la fecha en el momento de la transaccion
+    typeTransaction *transaction = (typeTransaction *) malloc(sizeof(typeTransaction) * 1);
+
+    fprintf(history_file, "%li;%i,%i,%i;", amount, current_date->day, current_date->month, current_date->year);
+    fprintf(history_file, "20191104;------;%s;", origin_acc->account_number);
+
+    if(origin_acc->account_type ==  RUT_ACC)
+        fprintf(history_file, "rut-acc;false\n");
+    else
+        fprintf(history_file, "saving-acc;false\n");
+
+    transaction->amount = -amount;                              //se crea la transaccion que se guardara en el historial
+    transaction->associated_acount = dest_owner;                //de la cuenta origen.
+    transaction->date = current_date;
+    pushBack(origin_acc->transactions_history, transaction);
+
+    fclose(history_file);                                       //se cierra el archivo "history.txt" de la cuenta destino
+    free(file_path);                                            //se libera la memoria de la ruta del archivo
+    free(acc_path);                                             //se libera la memoria de la ruta de la memoria
+    free(dest_acc);                                             //se libera la memoria de la cuenta destino
 }

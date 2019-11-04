@@ -48,6 +48,15 @@ typeAddressee *searchAccNumber(Map *acc_numbers);
 void addNotice(typeClient *client);
 
 /**
+ * Procedimiento que leera el monto a depositar y lo sumara al balance de la cuenta ingresada, ademas guardara el
+ * detalle de la transaccion en el  archivo history.txt de la carpeta de la cuenta.
+ *
+ * @param destination_acc: puntero que contiene la informacion de la cuenta a depositar.
+ * @param rut: rut del titular de la cuenta, se usara para entrar en la carpeta del cliente.
+ */
+void makeDeposit(typeAccount *destination_acc, char rut[]);
+
+/**
  * Procedimiento que muestra la informacion basica de un cliente (nombre, rut, cuentas activas).
  *
  * @param client: registro de typeClient, que contiene la informacion del cliente.

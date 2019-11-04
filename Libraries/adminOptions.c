@@ -113,6 +113,35 @@ void addNotice(typeClient *client)
     system("clear");
 }
 
+void makeDeposit(typeAccount *destination_acc, char rut[])
+{
+    long int amount;
+    printf("Ingrese el monto a depositar: ");
+    scanf("%li", &amount);
+
+    while(amount < 0)
+    {
+        printf("Monto ingresado no valido, intentelo nuevamente: ");
+        scanf("%li", &amount);
+    }
+
+    destination_acc->balance += amount;
+
+    char *file_path = setAccPath(rut, destination_acc->account_type);
+    strcat(file_path, "history-file.txt");
+
+    FILE *history_file = fopen(file_path, "a");
+    validFileOpening(history_file);
+
+    Date *current_date = getCurrentDate();
+
+    fprintf(history_file, "%li;%i,%i,%i;", amount, current_date->day, current_date->month, current_date->year);
+    fprintf(history_file, "03112019;Sucursal BankApp;07092019;rut-acc;false\n");
+
+    fclose(history_file);
+    free(file_path);
+}
+
 void showClient(typeClient *client)
 {
     printf("Nombre: %s\n", client->name);
