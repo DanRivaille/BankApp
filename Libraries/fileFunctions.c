@@ -229,7 +229,8 @@ void saveNotices(typeClient *client, List *list_notices)
 
     while(notice != NULL)
     {
-        fprintf(notices_file, "%s\n", notice->notice);
+        if(notice->readed == false)                         //si el aviso no ha sido leido se guarda
+            fprintf(notices_file, "%s\n", notice->notice);
 
         notice = (typeNotice *) nextList(list_notices);
     }

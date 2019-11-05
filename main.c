@@ -199,7 +199,7 @@ void mainMenuClient(Map *acc_numbers)
         {
             case 1  : optionsInfoClient(client);                break;
             case 2  : accessAccount(acc_numbers, client);       break;
-            case 3  : showNotices(list_notices);                break;
+            case 3  : showNotices(client, list_notices);                break;
             case 4  : printf("Sesion finalizada\n");            break;
             default : printf("Opcion ingresada no valida\n");
         }

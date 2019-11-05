@@ -12,12 +12,13 @@
 void createAccount(Map *acc_numbers, typeClient *client, char account_type);
 
 /**
- * Procedimiento que muestra los avisos que tiene pendiente el cliente ingresado
+ * Procedimiento que muestra los avisos que tiene pendiente el cliente ingresado, para cada aviso, le pregutara al usuario
+ * deja marcado como no leido el aviso, en ese caso se borra de la lista.
  *
  * @param client: puntero a typeClient que contiene la informacion del cliente.
  * @param list_notices: lista que contiene los avisos a mostrar.
  */
-void showNotices(List *list_notices);
+void showNotices(typeClient *client, List *list_notices);
 
 /**
  * Procedimiento que muestra la opciones que tiene el cliente para elegir el destinatario de la transferencia y lee el monto

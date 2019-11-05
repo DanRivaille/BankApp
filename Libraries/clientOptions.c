@@ -56,18 +56,38 @@ void createAccount(Map *acc_numbers, typeClient *client, char account_type)
     createAccFiles(client, new_account);
 }
 
-void showNotices(List *list_notices)
+void showNotices(typeClient *client, List *list_notices)
 {
     typeNotice *notice = (typeNotice *) firstList(list_notices);
+    int option;
 
     while(notice != NULL)
     {
-        printf("-%s\n\n", notice->notice);
+        if(notice->readed == false)                         //si el aviso no se ha leido
+        {
+            printf("------AVISOS------\n\n");
+            printf("%s\n\n", notice->notice);
+            printf("1 - Marcar como no leido    |   2 - Entendido\n");
+
+            printf("Ingrese una opcion: ");
+            scanf("%i", &option);
+
+            while((option != 1) && (option != 2))
+            {
+                printf("Opcion ingresada no valida, intente nuevamente: ");
+                scanf("%i", &option);
+            }
+
+            if(option == 2)
+            {
+                notice->readed = true;
+                client->notices--;
+            }
+        }
 
         notice = (typeNotice *) nextList(list_notices);
+        system("clear");
     }
-
-    _pause();
 }
 
 void menuTransaction(Map *acc_numbers, typeAccount *account)
