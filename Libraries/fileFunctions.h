@@ -71,6 +71,24 @@ void loadAccount(typeAccount *account, char rut[], char account_type);
 void saveAccount(typeAccount *account, char rut[]);
 
 /**
+ * Procedimiento que carga los avisos que tenga pendientes el cliente, para ello entra a la carpeta del cliente ingresado
+ * y abre el archivo "notices.txt" y carga los avisos en la lista ingresada como parametro.
+ *
+ * @param client: puntero a typeClient que contiene la informacion del cliente.
+ * @param list_notices: lista vacia que guardara los avisos recien cargados.
+ */
+void loadNotices(typeClient *client, List *list_notices);
+
+/**
+ * Procedimiento que guarda los avisos que tenga pendientes el cliente, para ello entra a la carpeta del cliente ingresado
+ * y abre el archivo "notices.txt" y guarda los avisos de la lista ingresada como parametro.
+ *
+ * @param client: puntero a typeClient que contiene la informacion del cliente.
+ * @param list_notices: lista que contiene los avisos a guardar.
+ */
+void saveNotices(typeClient *client, List *list_notices);
+
+/**
   * Procedimiento que valida si el archivo "file" fue abierto correctamente, en caso contrario, imprime una advertencia y aborta
   * la ejecucion del programa
   *

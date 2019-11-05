@@ -11,6 +11,7 @@ void _pause(void)
 
     printf("\nPulse una tecla para continuar");
     getchar();
+    system("clear");
 }
 
 void _cleanBuffer(void)

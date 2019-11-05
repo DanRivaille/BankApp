@@ -190,6 +190,54 @@ void saveAccount(typeAccount *account, char rut[])
     free(acc_path);
 }
 
+void loadNotices(typeClient *client, List *list_notices)
+{
+    char *file_path = setClientPath(client->rut);
+    strcat(file_path, "notices.txt");
+
+    FILE *notices_file = fopen(file_path, "r");
+    validFileOpening(notices_file);
+
+    typeNotice *new_notice;
+    char line[MAX_NOTICES + 1];
+
+    while(fscanf(notices_file, "%[^\n]s", line) != EOF)
+    {
+        fgetc(notices_file);                            //se saca el \n del buffer
+
+        new_notice = (typeNotice *) malloc(sizeof(typeNotice) * 1);
+
+        strcpy(new_notice->notice, line);
+        new_notice->readed = false;
+
+        pushBack(list_notices, new_notice);
+    }
+
+    fclose(notices_file);
+    free(file_path);
+}
+
+void saveNotices(typeClient *client, List *list_notices)
+{
+    char *file_path = setClientPath(client->rut);
+    strcat(file_path, "notices.txt");
+
+    FILE *notices_file = fopen(file_path, "w");
+    validFileOpening(notices_file);
+
+    typeNotice *notice = (typeNotice *) firstList(list_notices);
+
+    while(notice != NULL)
+    {
+        fprintf(notices_file, "%s\n", notice->notice);
+
+        notice = (typeNotice *) nextList(list_notices);
+    }
+
+    fclose(notices_file);
+    free(file_path);
+}
+
 void validFileOpening(FILE *file)
 {
     if(file == NULL)

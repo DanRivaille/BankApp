@@ -178,6 +178,8 @@ void mainMenuClient(Map *acc_numbers)
 {
     Map *clients_profiles = loadProfiles("clients.txt");
     typeClient *client = clientLogin(clients_profiles, acc_numbers);
+    List *list_notices = createList();
+    loadNotices(client, list_notices);
     system("clear");
 
     int option;
@@ -197,7 +199,7 @@ void mainMenuClient(Map *acc_numbers)
         {
             case 1  : optionsInfoClient(client);                break;
             case 2  : accessAccount(acc_numbers, client);       break;
-            case 3  : printf("ver avisos\n");                   break;
+            case 3  : showNotices(list_notices);                break;
             case 4  : printf("Sesion finalizada\n");            break;
             default : printf("Opcion ingresada no valida\n");
         }
@@ -207,6 +209,7 @@ void mainMenuClient(Map *acc_numbers)
         saveAccount(client->saving_account, client->rut);
 
     saveAccount(client->rut_account, client->rut);
+    saveNotices(client, list_notices);
     saveClientInfo(client);
     saveProfiles(clients_profiles, "clients.txt");
 }
@@ -335,7 +338,6 @@ void optionsAddressees(Map *acc_numbers, typeAccount *account)
             default : printf("Opcion ingresada no valida\n");
         }
         _pause();
-        system("clear");
     }while(option != 5);
 }
 

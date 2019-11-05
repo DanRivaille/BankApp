@@ -12,6 +12,24 @@
 void createAccount(Map *acc_numbers, typeClient *client, char account_type);
 
 /**
+ * Procedimiento que muestra los avisos que tiene pendiente el cliente ingresado
+ *
+ * @param client: puntero a typeClient que contiene la informacion del cliente.
+ * @param list_notices: lista que contiene los avisos a mostrar.
+ */
+void showNotices(List *list_notices);
+
+/**
+ * Procedimiento que muestra la opciones que tiene el cliente para elegir el destinatario de la transferencia y lee el monto
+ * a tranferir, luego realiza la transaccion entre las cuentas y guarda el detalle en el historial de transacciones de cada
+ * cuenta.
+ *
+ * @param acc_numbers: mapa que contendra los numeros de cuenta validos, se usara si el cliente quiere transferir a terceros.
+ * @param account: informacion de la cuenta que va a transferir.
+ */
+void menuTransaction(Map *acc_numbers, typeAccount *account);
+
+/**
  * Procedimiento que muestra el historial de movimientos (transacciones y depositos) de la cuenta.
  *
  * @param account: puntero a typeAccount de la cuenta que se quiere visualizar el historial.
@@ -34,16 +52,6 @@ void addAddressee(Map *acc_numbers, typeAccount *account);
  * @param account: puntero a typeAccount que contiene la informacion de la cuenta en donde se agregara el nuevo destinatario.
  */
 void deleteAddressee(typeAccount *account);
-
-/**
- * Procedimiento que muestra la opciones que tiene el cliente para elegir el destinatario de la transferencia y lee el monto
- * a tranferir, luego realiza la transaccion entre las cuentas y guarda el detalle en el historial de transacciones de cada
- * cuenta.
- *
- * @param acc_numbers: mapa que contendra los numeros de cuenta validos, se usara si el cliente quiere transferir a terceros.
- * @param account: informacion de la cuenta que va a transferir.
- */
-void menuTransaction(Map *acc_numbers, typeAccount *account);
 
 /**
  * Procedimiento que muestra los destinatarios guardados de la cuenta.

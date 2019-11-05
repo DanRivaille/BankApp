@@ -56,6 +56,20 @@ void createAccount(Map *acc_numbers, typeClient *client, char account_type)
     createAccFiles(client, new_account);
 }
 
+void showNotices(List *list_notices)
+{
+    typeNotice *notice = (typeNotice *) firstList(list_notices);
+
+    while(notice != NULL)
+    {
+        printf("-%s\n\n", notice->notice);
+
+        notice = (typeNotice *) nextList(list_notices);
+    }
+
+    _pause();
+}
+
 void menuTransaction(Map *acc_numbers, typeAccount *account)
 {
     typeAddressee *destination_owner = setDestination(acc_numbers, account);
