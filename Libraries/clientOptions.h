@@ -21,6 +21,14 @@ void createAccount(Map *acc_numbers, typeClient *client, char account_type);
 void showNotices(typeClient *client, List *list_notices);
 
 /**
+ * Procedimiento que le muestra al usuario su informacion, y por cada campo le pregunta si desea cambiarla.
+ *
+ * @param clients_profiles: mapa que contiene los perfiles guardados del sistema, se usara en caso que el cliente cambia la pass
+ * @param client: contiene la informacion del cliente.
+ */
+void updateInfo(Map *clients_profiles, typeClient *client);
+
+/**
  * Procedimiento que muestra la opciones que tiene el cliente para elegir el destinatario de la transferencia y lee el monto
  * a tranferir, luego realiza la transaccion entre las cuentas y guarda el detalle en el historial de transacciones de cada
  * cuenta.

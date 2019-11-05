@@ -90,6 +90,32 @@ void showNotices(typeClient *client, List *list_notices)
     }
 }
 
+void updateInfo(Map *clients_profiles, typeClient *client)
+{
+    int option;
+
+    printf("------Actualizar Informacion------\n\n");
+    printf("%s\n\n", client->name);
+    printf("1 - Cambiar nombre    |   2 - volver\n");
+
+    printf("Ingrese una opcion: ");
+    scanf("%i", &option);
+
+    while((option != 1) && (option != 2))
+    {
+        printf("Opcion ingresada no valida, intente nuevamente: ");
+        scanf("%i", &option);
+    }
+
+    if(option == 1)
+    {
+        _cleanBuffer();
+        printf("Ingrese su nuevo nombre: ");
+        scanf("%[^\n]s", client->name);
+    }
+    system("clear");
+}
+
 void menuTransaction(Map *acc_numbers, typeAccount *account)
 {
     typeAddressee *destination_owner = setDestination(acc_numbers, account);

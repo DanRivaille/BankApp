@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1572993134 source:/home/dan_santos/Documentos/Repositorios/BankApp/main.c
+1572994538 source:/home/dan_santos/Documentos/Repositorios/BankApp/main.c
 	<stdio.h>
 	<stdlib.h>
 	"Libraries/TDA-List/List.h"
@@ -53,7 +53,7 @@
 	"auxiliaryFunctions.h"
 	"adminOptions.h"
 
-1572989835 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/clientOptions.c
+1572995882 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/clientOptions.c
 	<stdio.h>
 	<time.h>
 	<stdlib.h>
@@ -92,7 +92,7 @@
 	"clientOptions.h"
 	"login.h"
 
-1572989029 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/clientOptions.h
+1572994408 /home/dan_santos/Documentos/Repositorios/BankApp/Libraries/clientOptions.h
 
 1572988767 source:/home/dan_santos/Documentos/Repositorios/BankApp/Libraries/auxiliaryFunctions.c
 	<stdio.h>

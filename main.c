@@ -22,7 +22,7 @@
 int mainMenu(void);                                           //eligira el tipo de perfil (administrador o cliente)
 void mainMenuAdmin(Map *acc_numbers);                         //opciones del administrador
 void mainMenuClient(Map *acc_numbers);                        //opciones del cliente
-void optionsInfoClient(typeClient *client);                   //mostrara la informacion del cliente y la opcion de actualizar
+void optionsInfoClient(Map *clients_profiles, typeClient *client); //mostrara la informacion del cliente y la opcion de actualizar
 void accessAccount(Map *acc_numbers, typeClient *client);     //menu que mostrara las cuentas del cliente
 void menuAccount(Map *acc_numbers, typeAccount * account);    //mostrara informacion de la cuenta y la opcion de ver opciones
 void optionsAccount(Map *acc_numbers, typeAccount *account);  //mostrara las opciones disponible de la cuenta
@@ -197,7 +197,7 @@ void mainMenuClient(Map *acc_numbers)
 
         switch(option)
         {
-            case 1  : optionsInfoClient(client);                break;
+            case 1  : optionsInfoClient(clients_profiles, client);                break;
             case 2  : accessAccount(acc_numbers, client);       break;
             case 3  : showNotices(client, list_notices);        break;
             case 4  : printf("Sesion finalizada\n");            break;
@@ -214,7 +214,7 @@ void mainMenuClient(Map *acc_numbers)
     saveProfiles(clients_profiles, "clients.txt");
 }
 
-void optionsInfoClient(typeClient *client)
+void optionsInfoClient(Map *clients_profiles, typeClient *client)
 {
     int option;
     do
@@ -229,8 +229,8 @@ void optionsInfoClient(typeClient *client)
 
         switch(option)
         {
-            case 1  : printf("Actualizar informacion cliente\n");      break;
-            case 2  : system("clear");                                 break;
+            case 1  : updateInfo(clients_profiles, client);      break;
+            case 2  : system("clear");                           break;
             default : printf("Opcion ingresada no valida\n");
         }
     }while(option != 2);
