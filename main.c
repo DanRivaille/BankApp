@@ -95,11 +95,11 @@ void mainMenuAdmin(Map *acc_numbers)
 
         switch(option)
         {
-            case 1  : optionSearchClient(clients_profiles);            break;
-            case 2  : optionSearchAccount(acc_numbers);           break;
-            case 3  : addClient(clients_profiles);     break;
-            case 4  : printf("eliminar cliente\n");    break;
-            case 5  : printf("Sesion finalizada\n");   break;
+            case 1  : optionSearchClient(clients_profiles);         break;
+            case 2  : optionSearchAccount(acc_numbers);             break;
+            case 3  : addClient(clients_profiles);                  break;
+            case 4  : removeClient(acc_numbers, clients_profiles);  break;
+            case 5  : printf("Sesion finalizada\n");                break;
             default : printf("Opcion ingresada no valida\n");
         }
     }while(option != 5);
@@ -199,7 +199,7 @@ void mainMenuClient(Map *acc_numbers)
         {
             case 1  : optionsInfoClient(client);                break;
             case 2  : accessAccount(acc_numbers, client);       break;
-            case 3  : showNotices(client, list_notices);                break;
+            case 3  : showNotices(client, list_notices);        break;
             case 4  : printf("Sesion finalizada\n");            break;
             default : printf("Opcion ingresada no valida\n");
         }

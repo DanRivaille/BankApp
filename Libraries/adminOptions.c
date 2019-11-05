@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 
@@ -12,6 +13,9 @@
 
 /** Prototipos de funciones estaticas */
 static typeProfile *createProfile(char new_rut[]);
+static void removeAccNumbers(Map *acc_numbers, typeClient *client);
+static void removeClientFiles(typeClient *client);
+static void removeAccFiles(char rut[], char type_account);
 static void createPass(typeProfile *profile);
 static typeClient *createClient(char new_rut[]);
 static void createClientFiles(typeClient *new_client);
@@ -44,13 +48,30 @@ void addClient(Map *profiles)
 
     printf("Su password inicial es : %s\n", new_profile->pass);
 
-    _pause();                           //se intenta simular system("pause"); de windows
-    system("clear");
+    _pause();                           //se intenta simular system("pause"); de window
 }
 
-void removeClient(Map *profiles)
+void removeClient(Map *acc_numbers, Map *clients_profiles)
 {
+    char rut[MAX_CARACT + 1];
+    typeClient *client;
 
+    printf("Ingrese el rut del cliente a eliminar: ");
+    scanf("%s", rut);
+
+    while(searchMap(clients_profiles, rut) == NULL)
+    {
+        getchar();
+        printf("No se encontro un perfil que coincida con el rut ingresado\n");
+        printf("Intente nuevamente: ");
+        scanf("%s", rut);
+    }
+
+    eraseKeyMap(clients_profiles, rut);
+
+    client = loadClientInfo(rut);
+    removeAccNumbers(acc_numbers, client);
+    removeClientFiles(client);
 }
 
 typeClient* searchClientRut(Map *clients_profiles)
@@ -163,6 +184,79 @@ static typeProfile *createProfile(char new_rut[])
     createPass(new_profile);
 
     return new_profile;
+}
+
+/** Procedimiento que elimina del mapa de cuentas, las cuentas que tenga activas el cliente.  */
+static void removeAccNumbers(Map *acc_numbers, typeClient *client)
+{
+    char *acc_path;
+    typeAccount *account;
+
+    if(client->rut_account != NULL)                                 //si tiene la cuenta rut activa
+    {
+        acc_path = setAccPath(client->rut, RUT_ACC);                    //se establece la ruta de la carpeta de la cuenta
+        account = (typeAccount *) calloc(1, sizeof(typeAccount));       //se le asigna memoria a la cuenta
+        account->account_type = RUT_ACC;                                //se inicializa el tipo de cuenta
+        loadAccInfo(account, acc_path);                                 //se carga el numero de cuenta
+        eraseKeyMap(acc_numbers, account->account_number);              //se elimina esa cuenta del mapa de cuentas validas
+        free(account);                                                  //se libera la memoria asignada a la cuenta
+        free(acc_path);                                                 //se libera la memoria asignada a la ruta de la carpeta
+    }
+
+    if(client->saving_account != NULL)                                 //si tiene la cuenta de ahorros activa
+    {
+        acc_path = setAccPath(client->rut, SAVING_ACC);                 //se establece la ruta de la carpeta de la cuenta
+        account = (typeAccount *) calloc(1, sizeof(typeAccount));       //se le asigna memoria a la cuenta
+        account->account_type = SAVING_ACC;                             //se inicializa el tipo de cuenta
+        loadAccInfo(account, acc_path);                                 //se carga el numero de cuenta
+        eraseKeyMap(acc_numbers, account->account_number);              //se elimina esa cuenta del mapa de cuentas validas
+        free(account);                                                  //se libera la memoria asignada a la cuenta
+        free(acc_path);                                                 //se libera la memoria asignada a la ruta de la carpeta
+    }
+}
+
+static void removeClientFiles(typeClient *client)
+{
+    char *client_path = setClientPath(client->rut);
+    char file_path[MAX_PATH + 1];
+
+    strcpy(file_path, client_path);
+    strcat(file_path, "client-info.txt");
+    remove(file_path);
+
+    strcpy(file_path, client_path);
+    strcat(file_path, "notices.txt");
+    remove(file_path);
+
+    if(client->rut_account != NULL)
+        removeAccFiles(client->rut, RUT_ACC);
+
+    if(client->saving_account != NULL)
+        removeAccFiles(client->rut, SAVING_ACC);
+
+    rmdir(client_path);
+    free(client_path);
+}
+
+static void removeAccFiles(char rut[], char type_account)
+{
+    char *acc_path = setAccPath(rut, type_account);
+    char file_path[MAX_PATH + 1];
+
+    strcpy(file_path, acc_path);
+    strcat(file_path, "acc-info.txt");
+    remove(file_path);
+
+    strcpy(file_path, acc_path);
+    strcat(file_path, "addressees-file.txt");
+    remove(file_path);
+
+    strcpy(file_path, acc_path);
+    strcat(file_path, "history-file.txt");
+    remove(file_path);
+
+    rmdir(acc_path);
+    free(acc_path);
 }
 
 /** Funcion que crea una pass aleatoria en el nuevo perfil */

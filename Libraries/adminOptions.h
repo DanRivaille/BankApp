@@ -16,10 +16,10 @@ void addClient(Map *profiles);
  * Procedimiento que lee un rut, lo busca en el sistema, si existe elimina toda su informacion, incluyendo sus archivos y directorios
  * asociados y por ultimo lo elimina del mapa de perfiles de clientes.
  *
- * @param profiles: mapa que contiene los perfiles de los clientes guardados en el sistema, se usara para saber si el rut
- * ingresado existe en el sistema.
+ * @param profiles: mapa que contiene los perfiles de los clientes guardados en el sistema.
+ * @param acc_numbers: mapa que contiene los numeros de cuenta validos en el sistema.
  */
-void removeClient(Map *profiles);
+void removeClient(Map *acc_numbers, Map *clients_profiles);
 
 /**
  * Funcion que lee un rut, y lo busca en el mapa de clientes, si no lo encuentra imprime una advertencia y lo vuelve a
