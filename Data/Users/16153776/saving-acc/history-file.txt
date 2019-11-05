@@ -1,0 +1,1 @@
+15000;4,10,2019;03112019;Sucursal BankApp;07092019;rut-acc;false

@@ -1,0 +1,3 @@
+175000;4,10,2019;03112019;Sucursal BankApp;07092019;rut-acc;false
+25000;4,10,2019;03112019;Sucursal BankApp;07092019;rut-acc;false
+-150000;4,10,2019;20360262;Ivan Santos;20360262;rut-acc;false

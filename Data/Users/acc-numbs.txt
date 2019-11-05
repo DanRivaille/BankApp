@@ -1,0 +1,6 @@
+16153776;Mark Gonzales;16153776;rut-acc;false
+16153776;Mark Gonzales;70054053;saving-acc;false
+20111222;Yasuo;58075086;saving-acc;false
+20360262;Ivan Santos;90013438;saving-acc;false
+20360262;Ivan Santos;20360262;rut-acc;false
+20111222;Yasuo;20111222;rut-acc;false

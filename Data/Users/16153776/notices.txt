@@ -1,0 +1,1 @@
+Bienvenido a BankApp!, una aplicacion bancaria experimental creada para simular lo mismo que haria una aplicacion bancaria cualquiera.

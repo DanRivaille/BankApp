@@ -2,14 +2,39 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="Libraries/login.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="364" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="Libraries/typesData.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1364" topLine="33" />
 		</Cursor>
 	</File>
-	<File name="Libraries/TDA-List/List.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Libraries/auxiliaryFunctions.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4" topLine="0" />
+			<Cursor1 position="238" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="Libraries/adminOptions.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6891" topLine="194" />
+		</Cursor>
+	</File>
+	<File name="Libraries/TDA-Map/Map.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1589" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="Libraries/adminOptions.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1144" topLine="10" />
+		</Cursor>
+	</File>
+	<File name="Libraries/clientOptions.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1290" topLine="15" />
 		</Cursor>
 	</File>
 	<File name="Libraries/TDA-Map/Map.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -17,14 +42,9 @@
 			<Cursor1 position="2271" topLine="51" />
 		</Cursor>
 	</File>
-	<File name="Libraries/login.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Libraries/fileFunctions.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="364" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Libraries/adminOptions.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2192" topLine="46" />
+			<Cursor1 position="3099" topLine="75" />
 		</Cursor>
 	</File>
 	<File name="Libraries/auxiliaryFunctions.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -32,49 +52,29 @@
 			<Cursor1 position="385" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Libraries/fileFunctions.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="6936" topLine="235" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="10271" topLine="324" />
-		</Cursor>
-	</File>
-	<File name="Libraries/fileFunctions.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3194" topLine="81" />
-		</Cursor>
-	</File>
-	<File name="Libraries/adminOptions.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3579" topLine="126" />
-		</Cursor>
-	</File>
-	<File name="Libraries/clientOptions.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2993" topLine="81" />
-		</Cursor>
-	</File>
 	<File name="Libraries/login.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1756" topLine="54" />
 		</Cursor>
 	</File>
-	<File name="Libraries/clientOptions.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2138" topLine="32" />
+			<Cursor1 position="7554" topLine="216" />
 		</Cursor>
 	</File>
-	<File name="Libraries/auxiliaryFunctions.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Libraries/TDA-List/List.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="119" topLine="0" />
+			<Cursor1 position="4" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Libraries/TDA-Map/Map.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Libraries/clientOptions.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1589" topLine="27" />
+			<Cursor1 position="3810" topLine="96" />
+		</Cursor>
+	</File>
+	<File name="Libraries/fileFunctions.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3621" topLine="81" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

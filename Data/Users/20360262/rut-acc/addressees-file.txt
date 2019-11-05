@@ -1,0 +1,3 @@
+16153776;Katarina;16153776;rut-acc;false
+20111222;Yasuo;20111222;rut-acc;true
+16153776;Ezreal;70054053;saving-acc;true

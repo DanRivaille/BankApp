@@ -1,0 +1,6 @@
+30000;3,10,2019;03112019;Sucursal BankApp;07092019;rut-acc;false
+36000;3,10,2019;03112019;Sucursal BankApp;07092019;rut-acc;false
+-15000;4,10,2019;16153776;Ezreal;70054053;saving-acc;true
+-15990;4,10,2019;20111222;Renekton;20111222;rut-acc;true
+-15010;4,10,2019;16153776;Katarina;16153776;rut-acc;false
+150000;4,10,2019;20191104;------;58075086;saving-acc;false
